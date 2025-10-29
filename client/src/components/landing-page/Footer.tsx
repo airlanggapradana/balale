@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import Link from "next/link";
 
 export const Footer = () => {
   return (
@@ -25,28 +26,28 @@ export const Footer = () => {
             <h3 className="text-foreground mb-4 font-semibold">Fitur</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a
-                  href="#e-commerce"
+                <Link
+                  href="/products"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   E-Commerce
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#pembelajaran"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Pembelajaran
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#permainan"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Mini Games
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

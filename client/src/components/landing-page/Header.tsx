@@ -25,21 +25,21 @@ const Header = () => {
         <nav className="hidden items-center gap-6 md:flex">
           <Link
             href={"/"}
-            className={`font-semibold transition-colors ${pathname === "/" ? "text-orange-500" : "text-gray-500"} hover:text-orange-500`}
+            className={`font-semibold transition-colors ${pathname === "/" ? "text-orange-500" : "text-gray-700"} hover:text-orange-500`}
           >
             Beranda
           </Link>
           <Link
             href={"/products"}
-            className={`font-semibold transition-colors ${pathname === "/products" ? "text-orange-500" : "text-gray-500"} hover:text-orange-500`}
+            className={`font-semibold transition-colors ${pathname === "/products" ? "text-orange-500" : "text-gray-700"} hover:text-orange-500`}
           >
             Produk
           </Link>
           <Link
-            href={"/about"}
-            className={`font-semibold transition-colors ${pathname === "/about" ? "text-orange-500" : "text-gray-500"} hover:text-orange-500`}
+            href={"#about"}
+            className={`font-semibold transition-colors ${pathname === "/about" ? "text-orange-500" : "text-gray-700"} hover:text-orange-500`}
           >
-            About
+            About Us
           </Link>
         </nav>
 

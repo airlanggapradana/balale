@@ -19,7 +19,7 @@ export const Hero = () => {
           alt="Traditional Indonesian games"
           className="h-full w-full object-cover"
         />
-        <div className="from-background/10 via-background/80 absolute inset-0 bg-gradient-to-b to-orange-100" />
+        <div className="from-background/20 absolute inset-0 bg-gradient-to-b to-gray-950" />
       </div>
 
       {/* Content */}
@@ -31,14 +31,14 @@ export const Hero = () => {
             </span>
           </div>
 
-          <h1 className="text-foreground mb-6 text-5xl leading-tight font-bold md:text-7xl">
+          <h1 className="mb-6 text-5xl leading-tight font-black text-white/95 md:text-7xl">
             Jelajahi Kekayaan
             <span className="mt-2 block bg-gradient-to-br from-orange-600 to-orange-400 bg-clip-text text-transparent">
               Permainan Tradisional
             </span>
           </h1>
 
-          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-gray-700 md:text-xl">
+          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed font-medium text-gray-300 md:text-xl">
             Platform lengkap untuk membeli kerajinan lokal, belajar sejarah
             permainan tradisional, dan bermain mini games yang menyenangkan.
           </p>
@@ -68,30 +68,28 @@ export const Hero = () => {
           {/* Stats */}
           <div className="mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-8">
             <div className="animate-slide-in">
-              <div className="text-primary mb-2 text-3xl font-bold md:text-4xl">
+              <div className="mb-2 text-3xl font-bold text-gray-100 md:text-4xl">
                 50+
               </div>
-              <div className="text-muted-foreground text-sm">Produk UMKM</div>
+              <div className="text-sm text-gray-300">Produk UMKM</div>
             </div>
             <div
               className="animate-slide-in"
               style={{ animationDelay: "0.1s" }}
             >
-              <div className="text-primary mb-2 text-3xl font-bold md:text-4xl">
+              <div className="mb-2 text-3xl font-bold text-gray-100 md:text-4xl">
                 15+
               </div>
-              <div className="text-muted-foreground text-sm">Permainan</div>
+              <div className="text-sm text-gray-300">Permainan</div>
             </div>
             <div
               className="animate-slide-in"
               style={{ animationDelay: "0.2s" }}
             >
-              <div className="text-primary mb-2 text-3xl font-bold md:text-4xl">
+              <div className="mb-2 text-3xl font-bold text-gray-100 md:text-4xl">
                 100+
               </div>
-              <div className="text-muted-foreground text-sm">
-                Artikel Sejarah
-              </div>
+              <div className="text-sm text-gray-300">Artikel Sejarah</div>
             </div>
           </div>
         </div>
