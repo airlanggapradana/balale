@@ -5,22 +5,20 @@ export const Footer = () => {
     <footer className="bg-card border-border border-t py-12">
       <div className="container mx-auto px-4">
         <div className="mb-8 grid gap-8 md:grid-cols-4">
+          {/* Kolom 1 - Logo dan Deskripsi */}
           <div>
             <div className="mb-4 flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-orange-300">
-                <span className="text-primary-foreground text-lg font-bold">
-                  B
-                </span>
+                <span className="text-primary-foreground text-lg font-bold">B</span>
               </div>
-              <span className="text-foreground text-xl font-bold">
-                Balale.id
-              </span>
+              <span className="text-foreground text-xl font-bold">Balale.id</span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Melestarikan budaya Indonesia melalui teknologi dan kreativitas
+              Melestarikan budaya Indonesia melalui teknologi dan kreativitas.
             </p>
           </div>
 
+          {/* Kolom 2 - Fitur */}
           <div>
             <h3 className="text-foreground mb-4 font-semibold">Fitur</h3>
             <ul className="space-y-2 text-sm">
@@ -42,7 +40,7 @@ export const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#permainan"
+                  href="/gasing"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Mini Games
@@ -51,6 +49,7 @@ export const Footer = () => {
             </ul>
           </div>
 
+          {/* Kolom 3 - Perusahaan */}
           <div>
             <h3 className="text-foreground mb-4 font-semibold">Perusahaan</h3>
             <ul className="space-y-2 text-sm">
@@ -81,6 +80,7 @@ export const Footer = () => {
             </ul>
           </div>
 
+          {/* Kolom 4 - Sosial Media */}
           <div>
             <h3 className="text-foreground mb-4 font-semibold">Ikuti Kami</h3>
             <div className="flex gap-3">
@@ -112,6 +112,7 @@ export const Footer = () => {
           </div>
         </div>
 
+        {/* Copyright */}
         <div className="border-border text-muted-foreground border-t pt-8 text-center text-sm">
           <p>© {new Date().getFullYear()} Balale.id. Semua hak dilindungi.</p>
         </div>
