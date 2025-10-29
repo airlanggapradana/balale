@@ -19,7 +19,7 @@ export const Hero = () => {
           alt="Traditional Indonesian games"
           className="h-full w-full object-cover"
         />
-        <div className="from-background/5 via-background/80 absolute inset-0 bg-gradient-to-b to-orange-200" />
+        <div className="from-background/10 via-background/80 absolute inset-0 bg-gradient-to-b to-orange-100" />
       </div>
 
       {/* Content */}
@@ -38,7 +38,7 @@ export const Hero = () => {
             </span>
           </h1>
 
-          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl">
+          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-gray-700 md:text-xl">
             Platform lengkap untuk membeli kerajinan lokal, belajar sejarah
             permainan tradisional, dan bermain mini games yang menyenangkan.
           </p>
