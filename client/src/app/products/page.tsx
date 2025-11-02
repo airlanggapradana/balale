@@ -1,92 +1,55 @@
-import React from "react";
+"use client";
+import React, { useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { products } from "@/utils/product-mock";
 import type { Product } from "@/types/product.type";
-
-const products: Product[] = [
-  {
-    id: "p-001",
-    image_url: "https://picsum.photos/seed/p1/800/600",
-    category: "Kerajinan Kayu",
-    name: "Talenan Balok Kayu Jati",
-    description:
-      "Talenan solid dari kayu jati, tahan lama dan ramah lingkungan. Cocok untuk dapur modern.",
-    craftsman_name: "Pak Budi",
-    craftsman_location: "Sukabumi, Jawa Barat",
-    price: 85000,
-    stock: 12,
-  },
-  {
-    id: "p-002",
-    image_url: "https://picsum.photos/seed/p2/800/600",
-    category: "Tenun",
-    name: "Syal Tenun Tradisional",
-    description:
-      "Syal tenun tangan dengan motif etnik, lembut dan hangat, dibuat oleh pengrajin lokal.",
-    craftsman_name: "Ibu Sari",
-    craftsman_location: "Bima, Nusa Tenggara Barat",
-    price: 120000,
-    stock: 5,
-  },
-  {
-    id: "p-003",
-    image_url: "https://picsum.photos/seed/p3/800/600",
-    category: "Keramik",
-    name: "Cangkir Kopi Handmade",
-    description:
-      "Cangkir keramik bentuk ergonomis, glasir alami, setiap buah unik karena proses handmade.",
-    craftsman_name: "Pak Agus",
-    craftsman_location: "Sleman, Yogyakarta",
-    price: 65000,
-    stock: 0,
-  },
-  {
-    id: "p-004",
-    image_url: "https://picsum.photos/seed/p4/800/600",
-    category: "Aksesori",
-    name: "Gantungan Kunci Batik",
-    description:
-      "Gantungan kunci motif batik, kecil dan ringan — cocok untuk suvenir atau oleh-oleh.",
-    craftsman_name: "Ibu Wati",
-    craftsman_location: "Solo, Jawa Tengah",
-    price: 25000,
-    stock: 40,
-  },
-  {
-    id: "p-005",
-    image_url: "https://picsum.photos/seed/p5/800/600",
-    category: "Kuliner",
-    name: "Sambal Buatan Rumah",
-    description:
-      "Sambal pedas manis khas resep turun-temurun, dikemas higienis untuk oleh-oleh.",
-    craftsman_name: "Pak Hadi",
-    craftsman_location: "Padang, Sumatera Barat",
-    price: 45000,
-    stock: 20,
-  },
-  {
-    id: "p-006",
-    image_url: "https://picsum.photos/seed/p6/800/600",
-    category: "Kulit",
-    name: "Dompet Kulit Minimalis",
-    description:
-      "Dompet kulit buatan tangan dengan jahitan rapi, desain tipis untuk kantong depan.",
-    craftsman_name: "Pak Ahmad",
-    craftsman_location: "Bandung, Jawa Barat",
-    price: 175000,
-    stock: 7,
-  },
-];
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(
     value,
   );
 
+type CartItem = {
+  id: string;
+  name: string;
+  price: number;
+  image_url?: string;
+  quantity: number;
+};
+
 const Products = () => {
+  const addToCart = useCallback((product: Product) => {
+    try {
+      const raw = localStorage.getItem("cart");
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const cart: CartItem[] = raw ? JSON.parse(raw) : [];
+
+      const existing = cart.find((c) => c.id === product.id);
+      if (existing) {
+        // increase quantity but don't exceed stock
+        existing.quantity = Math.min(existing.quantity + 1, product.stock);
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image_url: product.image_url,
+          quantity: 1,
+        });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } catch (err) {
+      // silent fail for localStorage errors
+      // optionally handle/report error
+      console.error("Failed to update cart", err);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen">
       <main className="container mx-auto px-4 py-24">
@@ -147,7 +110,11 @@ const Products = () => {
                     </div>
                   </div>
 
-                  <Button disabled={product.stock === 0} className="gap-2">
+                  <Button
+                    disabled={product.stock === 0}
+                    className="gap-2"
+                    onClick={() => addToCart(product)}
+                  >
                     <ShoppingCart className="h-4 w-4" />
                     {product.stock > 0 ? "Tambah" : "Habis"}
                   </Button>

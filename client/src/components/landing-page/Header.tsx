@@ -1,7 +1,7 @@
 "use client";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { LogIn, Menu } from "lucide-react";
+import { LogIn, LogOut, Menu, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,6 +9,38 @@ import { usePathname } from "next/navigation";
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const updateAuthState = useCallback(() => {
+    try {
+      setIsLoggedIn(Boolean(localStorage.getItem("currentUser")));
+    } catch {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    // initial check
+    updateAuthState();
+
+    // update on storage events (other tabs) and custom authChange events (same tab)
+    const onStorage = () => updateAuthState();
+    const onAuthChange = () => updateAuthState();
+
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("authChange", onAuthChange);
+
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("authChange", onAuthChange);
+    };
+  }, [updateAuthState]);
+
+  // also re-check when route changes (optional)
+  useEffect(() => {
+    updateAuthState();
+  }, [pathname, updateAuthState]);
+
   return (
     <header className="fixed top-0 right-0 left-0 z-50 bg-white/90 backdrop-blur-md">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
@@ -44,17 +76,39 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-3">
-          <>
-            <Button
-              variant="outline"
-              className="hidden md:flex"
-              onClick={() => router.push("/auth")}
-            >
-              Masuk
-              <LogIn />
-            </Button>
-            <Button onClick={() => router.push("/auth")}>Daftar</Button>
-          </>
+          {isLoggedIn ? (
+            <>
+              <Button
+                variant="ghost"
+                size="default"
+                onClick={() => router.push("/carts")}
+              >
+                <ShoppingCart className="h-5 w-5" />
+              </Button>
+              <Button
+                size={"default"}
+                onClick={() => {
+                  localStorage.removeItem("currentUser");
+                  localStorage.removeItem("users");
+                  window.location.reload();
+                }}
+              >
+                <LogOut />
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="outline"
+                className="hidden md:flex"
+                onClick={() => router.push("/auth")}
+              >
+                Masuk
+                <LogIn />
+              </Button>
+              <Button onClick={() => router.push("/auth")}>Daftar</Button>
+            </>
+          )}
           <Button variant="ghost" size="icon" className="md:hidden">
             <Menu className="h-5 w-5" />
           </Button>

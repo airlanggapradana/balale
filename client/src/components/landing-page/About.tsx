@@ -44,7 +44,7 @@ const About = () => {
   return (
     <div
       id={"about"}
-      className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-100 px-4 py-24 sm:px-6 lg:px-8"
+      className="to-bg-card min-h-screen bg-gradient-to-b from-gray-950 px-4 py-24 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         {/* About Section */}
