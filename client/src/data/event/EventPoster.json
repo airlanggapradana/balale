@@ -1,0 +1,132 @@
+{
+  "balale_info": {
+    "name": "Balale.id",
+    "description": "Platform kolaboratif untuk edukasi, inovasi, dan pengembangan produk lokal berdaya saing global.",
+    "focus": ["Permainan Tradisional", "Kriya Lokal", "Edukasi Budaya", "Digitalisasi UMKM"],
+    "founded": "2024",
+    "headquarters": "Yogyakarta, Indonesia"
+  },
+
+  "balale_events": [
+    {
+      "id": "E001",
+      "title": "Festival Dolanan Nusantara",
+      "subtitle": "Nasional",
+      "category": "Event",
+      "location": "Yogyakarta",
+      "date": "20–23 Mei 2026",
+      "image": "/assets/images/events/dolananfest.jpg",
+      "description": "Pameran interaktif dan workshop permainan tradisional dari 34 provinsi Indonesia.",
+      "link": "https://balale.id/events/dolanan-fest"
+    },
+    {
+      "id": "E002",
+      "title": "Balale Innovation Camp",
+      "subtitle": "Regional",
+      "category": "Event",
+      "location": "Bandung",
+      "date": "10–12 Juli 2026",
+      "image": "/assets/images/events/balalecamp.jpg",
+      "description": "Bootcamp inovasi dan hackathon budaya untuk generasi muda kreatif.",
+      "link": "https://balale.id/events/innovation-camp"
+    }
+  ],
+
+  "balale_products": [
+    {
+      "id": "P101",
+      "title": "Egrang Kayu Premium",
+      "subtitle": "Kriya Nusantara",
+      "category": "Permainan Tradisional",
+      "price": 250000,
+      "origin": "Klaten, Jawa Tengah",
+      "image": "/assets/images/products/egrang.jpg",
+      "description": "Egrang kayu buatan tangan pengrajin lokal, ramah anak dan ramah lingkungan.",
+      "link": "/product/egrang-premium"
+    },
+    {
+      "id": "P102",
+      "title": "Wayang Kulit Mini Edukasi",
+      "subtitle": "Sanggar Wayang Arjuna",
+      "category": "Kriya Edukatif",
+      "price": 180000,
+      "origin": "Bantul, DIY",
+      "image": "/assets/images/products/wayang.jpg",
+      "description": "Wayang kulit mini dengan tokoh pewayangan populer untuk edukasi anak sekolah.",
+      "link": "/product/wayang-mini"
+    }
+  ],
+
+  "balale_learning": [
+    {
+      "id": "L001",
+      "title": "Sejarah dan Filosofi Permainan Congklak",
+      "subtitle": "Artikel",
+      "category": "Pembelajaran",
+      "duration": "7 menit baca",
+      "image": "/assets/images/learning/congklak.jpg",
+      "description": "Artikel mendalam tentang nilai-nilai budaya dan filosofi permainan congklak sebagai warisan edukatif.",
+      "link": "https://balale.id/learn/congklak"
+    },
+    {
+      "id": "L002",
+      "title": "Belajar Gotong Royong Lewat Gobak Sodor",
+      "subtitle": "Video",
+      "category": "Pembelajaran",
+      "duration": "10 menit",
+      "image": "/assets/images/learning/gobaksodor.jpg",
+      "description": "Video pembelajaran interaktif untuk menanamkan nilai gotong royong melalui permainan tradisional Gobak Sodor.",
+      "link": "https://balale.id/learn/gobak-sodor"
+    }
+  ],
+
+  "balale_games": [
+    {
+      "id": "G001",
+      "title": "Mini Congklak Online",
+      "subtitle": "Game Edukatif",
+      "category": "Game",
+      "difficulty": "Mudah",
+      "image": "/assets/images/games/congklakgame.jpg",
+      "description": "Permainan congklak versi digital yang mendidik dan menyenangkan untuk semua usia.",
+      "link": "https://balale.id/games/congklak"
+    },
+    {
+      "id": "G002",
+      "title": "Petualangan Egrang",
+      "subtitle": "Game Interaktif",
+      "category": "Game",
+      "difficulty": "Menengah",
+      "image": "/assets/images/games/egranggame.jpg",
+      "description": "Game interaktif berbasis budaya yang mengajak pemain menjelajahi dunia permainan tradisional egrang.",
+      "link": "https://balale.id/games/egrang"
+    }
+  ],
+
+  "balale_community": [
+    {
+      "id": "C01",
+      "title": "Komunitas Dolanan Nusantara",
+      "subtitle": "Yogyakarta",
+      "category": "Komunitas",
+      "members": 250,
+      "focus": ["Permainan Tradisional", "Pendidikan Karakter"],
+      "image": "/assets/images/community/dolanan.jpg",
+      "description": "Komunitas pelestari permainan tradisional yang aktif menyelenggarakan kegiatan edukatif dan budaya.",
+      "contact": "@dolanan_nusantara",
+      "link": "https://instagram.com/dolanan_nusantara"
+    },
+    {
+      "id": "C02",
+      "title": "Balale Innovator Club",
+      "subtitle": "Jakarta",
+      "category": "Komunitas",
+      "members": 120,
+      "focus": ["Digitalisasi Budaya", "Startup & Teknologi"],
+      "image": "/assets/images/community/innovator.jpg",
+      "description": "Komunitas anak muda kreatif yang berfokus pada inovasi dan transformasi digital untuk pelestarian budaya.",
+      "contact": "@balale_innovator",
+      "link": "https://instagram.com/balale_innovator"
+    }
+  ]
+}
