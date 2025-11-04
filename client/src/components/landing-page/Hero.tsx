@@ -19,7 +19,7 @@ export const Hero = () => {
           alt="Traditional Indonesian games"
           className="h-full w-full object-cover"
         />
-        <div className="from-background/20 absolute inset-0 bg-gradient-to-b to-gray-950" />
+        <div className="from-background/20 absolute inset-0 bg-linear-to-b to-gray-950" />
       </div>
 
       {/* Content */}
@@ -33,7 +33,7 @@ export const Hero = () => {
 
           <h1 className="mb-6 text-5xl leading-tight font-black text-white/95 md:text-7xl">
             Jelajahi Kekayaan
-            <span className="mt-2 block bg-gradient-to-br from-orange-600 to-orange-400 bg-clip-text text-transparent">
+            <span className="mt-2 block bg-linear-to-br from-orange-600 to-orange-400 bg-clip-text text-transparent">
               Permainan Tradisional
             </span>
           </h1>

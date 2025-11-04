@@ -98,7 +98,7 @@ const CartPage: React.FC = () => {
           {cart.map((item) => (
             <Card key={item.id} className="flex items-center gap-4 p-4">
               {item.image_url && (
-                <div className="relative h-32 w-40 flex-shrink-0">
+                <div className="relative h-32 w-40 shrink-0">
                   <Image
                     src={item.image_url}
                     alt={item.name}
@@ -130,7 +130,7 @@ const CartPage: React.FC = () => {
                     <Minus className="h-4 w-4" />
                   </Button>
 
-                  <div className="min-w-[2rem] text-center">
+                  <div className="min-w-8 text-center">
                     {item.quantity}
                   </div>
 

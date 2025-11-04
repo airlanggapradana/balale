@@ -1,0 +1,604 @@
+"use client";
+
+import Image from "next/image";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+
+// ===== Hover Founder Card =====
+type FounderProps = { name: string; role: string; img: string };
+
+function FounderCard({ name, role, img }: FounderProps) {
+  // motion values untuk tilt mengikuti kursor
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+
+  // mapping -> sudut rotasi + parallax
+  const rotateX = useTransform(my, [-50, 50], [8, -8]);
+  const rotateY = useTransform(mx, [-50, 50], [-8, 8]);
+  const translateAvatar = useTransform(my, [-50, 50], [-6, 6]);
+
+  const onMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - (rect.left + rect.width / 2);
+    const y = e.clientY - (rect.top + rect.height / 2);
+    mx.set(Math.max(-50, Math.min(50, x / 4)));
+    my.set(Math.max(-50, Math.min(50, y / 4)));
+  };
+
+  const onMouseLeave = () => {
+    mx.set(0);
+    my.set(0);
+  };
+
+  return (
+    <motion.div
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{ rotateX, rotateY }}
+      whileHover={{ y: -6, scale: 1.015 }}
+      whileTap={{ scale: 0.995 }}
+      transition={{ type: "spring", stiffness: 200, damping: 18 }}
+      className="group relative overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 p-6 shadow-[0_8px_30px_rgba(28,44,75,0.12)] transform-3d"
+    >
+      {/* animated glow */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+        animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        style={{
+          background:
+            "linear-gradient(120deg, rgba(192,151,77,.28), rgba(28,44,75,.18), rgba(192,151,77,.28))",
+          backgroundSize: "200% 200%",
+          filter: "blur(26px)",
+        }}
+      />
+      <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-[#C0974D]/20 blur-2xl" />
+
+      <div className="flex items-center gap-5">
+        {/* Avatar parallax */}
+        <motion.div
+          style={{ translateY: translateAvatar, translateZ: 30 }}
+          className="relative h-16 w-16 shrink-0 transform-[translateZ(30px)]"
+        >
+          <Image src={img} alt={name} fill className="rounded-full object-cover" />
+          <div className="absolute inset-0 rounded-full ring-2 ring-transparent group-hover:ring-[#C0974D]/60 transition" />
+        </motion.div>
+
+        <div className="transform-[translateZ(20px)]">
+          <div className="font-semibold text-lg">{name}</div>
+          <div className="text-sm text-[#1C2C4B]/60">{role}</div>
+        </div>
+      </div>
+
+      <p className="mt-4 text-sm text-[#1C2C4B]/80 leading-relaxed transform-[translateZ(10px)]">
+        Menginisiasi arah strategis Balale, mengembangkan kemitraan, dan
+        memastikan setiap program membawa dampak nyata bagi komunitas.
+      </p>
+
+      <span
+        className="mt-5 block h-1 w-14 rounded-full bg-[#C0974D]/70 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+        aria-hidden
+      />
+    </motion.div>
+  );
+}
+
+// ===== Anim helpers =====
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" },
+  viewport: { once: true, margin: "-120px" },
+};
+
+const fade = {
+  initial: { opacity: 0 },
+  whileInView: { opacity: 1 },
+  transition: { duration: 0.8 },
+  viewport: { once: true },
+};
+
+export default function AboutContent() {
+  return (
+    <main className=" text-[#1C2C4B] min-h-screen overflow-hidden">
+      {/* Header Section */}
+      <section className="container mx-auto px-4 pt-28 md:pt-36 pb-16 text-center relative">
+        {/* Soft blob decor */}
+        <motion.div
+          {...fade}
+          className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full blur-3xl opacity-30"
+          style={{
+            background:
+              "radial-gradient(60% 60% at 50% 50%, #C0974D66 0%, transparent 70%)",
+          }}
+        />
+        <motion.div
+          {...fade}
+          className="pointer-events-none absolute -bottom-8 -right-12 h-64 w-64 rounded-full blur-3xl opacity-30"
+          style={{
+            background:
+              "radial-gradient(60% 60% at 50% 50%, #1C2C4B66 0%, transparent 70%)",
+          }}
+        />
+
+        <motion.h1
+          {...fadeUp}
+          className="text-4xl md:text-5xl font-extrabold tracking-tight"
+        >
+          Tentang Balale.id
+        </motion.h1>
+        <motion.p
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.1 }}
+          className="mt-4 max-w-3xl mx-auto text-[#1C2C4B]/80 leading-relaxed"
+        >
+          <strong>Balale.id</strong> menghadirkan ekosistem digital untuk
+          pelestarian budaya dan pemberdayaan ekonomi kreatif. Kami berfokus
+          pada edukasi budaya, inovasi teknologi, dan kolaborasi berkelanjutan
+          yang berakar pada nilai-nilai Nusantara.
+        </motion.p>
+        <motion.div
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.2 }}
+          className="mt-5 flex justify-center"
+        >
+          <span className="h-1 w-20 rounded-full bg-[#C0974D]" />
+        </motion.div>
+      </section>
+
+      {/* Section 1 — Profil Singkat */}
+      <section className="container mx-auto px-4 pb-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <motion.div {...fadeUp}>
+          <h2 className="text-2xl md:text-3xl font-bold mb-3">Profil Balale.id</h2>
+          <p className="text-[#1C2C4B]/80 leading-relaxed">
+            Didirikan pada tahun <strong>2024</strong> di{" "}
+            <strong>Yogyakarta</strong>, Balale.id adalah platform kolaboratif
+            yang menghubungkan <em>pelaku budaya</em>, <em>pendidik</em>, dan{" "}
+            <em>kreator lokal</em> dalam satu ekosistem digital berkelanjutan.
+            Kami mempertemukan <strong>tradisi</strong> dan{" "}
+            <strong>inovasi</strong> untuk menjaga warisan budaya sambil
+            mendorong kemajuan ekonomi kreatif Indonesia.
+          </p>
+
+          <h3 className="mt-8 text-xl md:text-2xl font-semibold text-[#C0974D]">
+            Fokus Kami
+          </h3>
+          <ul className="mt-3 list-disc list-inside text-[#1C2C4B]/80 space-y-1">
+            <li>Permainan Tradisional</li>
+            <li>Kriya Lokal & Produk Budaya</li>
+            <li>Edukasi & Literasi Budaya</li>
+            <li>Digitalisasi UMKM</li>
+          </ul>
+        </motion.div>
+
+        <motion.div
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.1 }}
+          className="flex justify-center"
+        >
+          <Image
+            src="/assets/images/logo/balale_white.png"
+            alt="Logo Balale.id"
+            width={400}
+            height={400}
+            className="rounded-2xl bg-[#1C2C4B] p-8 shadow-[0_8px_30px_rgba(28,44,75,0.18)] ring-1 ring-black/5"
+          />
+        </motion.div>
+      </section>
+
+      {/* Section 2 — Visi & Misi */}
+      <section className="relative overflow-hidden bg-[#1C2C4B] text-[#EEECE4] py-20">
+        <motion.div
+          {...fade}
+          className="pointer-events-none absolute -right-20 -top-16 h-80 w-80 rounded-full blur-3xl opacity-30"
+          style={{
+            background:
+              "radial-gradient(60% 60% at 50% 50%, #C0974D88 0%, transparent 70%)",
+          }}
+        />
+        <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-start">
+          <motion.div {...fadeUp}>
+            <h2 className="text-3xl font-bold mb-4 text-[#C0974D]">Visi</h2>
+            <p className="text-[#EEECE4]/90 leading-relaxed">
+              Menjadi platform digital budaya yang menghubungkan nilai-nilai
+              tradisi Nusantara dengan inovasi modern demi menciptakan ekosistem
+              kreatif yang berdaya saing global dan berkelanjutan.
+            </p>
+          </motion.div>
+
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.1 }}
+          >
+            <h2 className="text-3xl font-bold mb-4 text-[#C0974D]">Misi</h2>
+            <ul className="text-[#EEECE4]/90 space-y-2 list-disc list-inside">
+              <li>
+                Mendorong pelestarian budaya melalui inovasi dan digitalisasi.
+              </li>
+              <li>
+                Memberdayakan komunitas lokal & UMKM agar mandiri secara kreatif
+                dan ekonomi.
+              </li>
+              <li>
+                Membangun ruang edukasi budaya yang interaktif dan inklusif.
+              </li>
+              <li>
+                Menjadi jembatan kolaborasi antara generasi muda, pelaku budaya,
+                dan industri kreatif.
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Section 3 — Pilar Ekosistem */}
+      <section className="container mx-auto px-4 py-24">
+        <motion.h2
+          {...fadeUp}
+          className="text-3xl md:text-4xl font-bold text-center"
+        >
+          Pilar Ekosistem Balale
+        </motion.h2>
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              t: "Education",
+              d: "Modul pembelajaran budaya interaktif dan workshop kreatif berbasis teknologi.",
+            },
+            {
+              t: "Product",
+              d: "Katalog kriya dan permainan tradisional berkualitas dengan cerita lokal.",
+            },
+            {
+              t: "Community",
+              d: "Jaringan komunitas budaya dan kreator lokal yang berkolaborasi dalam proyek nyata.",
+            },
+            {
+              t: "Innovation",
+              d: "Inkubasi ide, digitalisasi UMKM, dan transformasi nilai budaya ke era modern.",
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={item.t}
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.05 * i }}
+              className="rounded-2xl bg-white/90 ring-1 ring-black/5 p-5 text-center shadow-[0_8px_30px_rgba(28,44,75,0.10)]"
+            >
+              <h4 className="font-semibold text-[#1C2C4B]">{item.t}</h4>
+              <p className="mt-2 text-sm text-[#1C2C4B]/80">{item.d}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Section 4 — Program Unggulan */}
+      <section className="relative overflow-hidden bg-[#1C2C4B] text-[#EEECE4] py-20">
+        <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <motion.div {...fadeUp}>
+            <h2 className="text-3xl font-bold mb-4">Program & Acara</h2>
+            <p className="text-white leading-relaxed mb-4">
+              Balale.id menginisiasi beragam kegiatan budaya dan inovasi, mulai
+              dari festival, bootcamp, hingga pameran interaktif. Semua dirancang
+              untuk menghubungkan kreativitas generasi muda dengan nilai-nilai
+              luhur Nusantara.
+            </p>
+            <ul className="list-disc list-inside text-white space-y-1">
+              <li>Festival Dolanan Nusantara</li>
+              <li>Balale Innovation Camp</li>
+              <li>Program Digitalisasi UMKM & Workshop Kriya</li>
+              <li>Balale EduSeries & Creative Talks</li>
+            </ul>
+          </motion.div>
+
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.1 }}
+            className="rounded-2xl bg-white ring-1 ring-black/5 p-4 shadow-[0_8px_30px_rgba(28,44,75,0.10)]"
+          >
+            <Image
+              src="/assets/images/about/ecosystem-showcase.jpg"
+              alt="Ekosistem Balale"
+              width={960}
+              height={540}
+              className="rounded-xl object-cover"
+            />
+            <p className="text-xs text-[#1C2C4B]/60 mt-3 text-center">
+              *Ilustrasi kegiatan & ekosistem Balale.id (gantikan dengan foto
+              resmi).
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Section 5 — Data Singkat */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+          {[
+            { label: "Didirikan", value: "2024" },
+            { label: "Markas", value: "Yogyakarta" },
+            { label: "Fokus", value: "Budaya, Kriya, UMKM" },
+            { label: "Nilai", value: "Keberlanjutan & Kolaborasi" },
+          ].map((item) => (
+            <motion.div
+              key={item.label}
+              {...fadeUp}
+              className="rounded-xl bg-white ring-1 ring-black/5 p-4"
+            >
+              <div className="text-sm text-[#1C2C4B]/60">{item.label}</div>
+              <div className="text-base font-semibold">{item.value}</div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Section 6 — Founder & Co-Founders (dengan hover animasi) */}
+      <section className="relative overflow-hidden  text-[#1C2C4B] py-24">
+        <div className="container mx-auto px-6 md:px-12">
+          <motion.h2
+            {...fadeUp}
+            className="text-3xl md:text-4xl font-extrabold text-center"
+          >
+            Balale Founder & Co-Founders
+          </motion.h2>
+          <motion.p
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.1 }}
+            className="mt-3 max-w-3xl mx-auto text-center text-[#1C2C4B]/80"
+          >
+            Balale dibangun oleh tim lintas disiplin dengan latar belakang
+            budaya, pendidikan, dan teknologi. Kami percaya kolaborasi adalah
+            kunci inovasi berkelanjutan.
+          </motion.p>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-[1000px]">
+            {[
+              { name: "Deni Irawan", role: "Founder", img: "/assets/images/team/deni.jpg" },
+              { name: "Prita Elriza", role: "Co-Founder", img: "/assets/images/team/prita.jpg" },
+              { name: "Anggraini", role: "Co-Founder", img: "/assets/images/team/anggraini.jpg" },
+            ].map((p) => (
+              <FounderCard key={p.name} {...p} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 7 — Tim Ahli & Staf */}
+      <section className="bg-[#1C2C4B] text-[#EEECE4] py-24">
+        <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-10">
+          <motion.div {...fadeUp}>
+            <h3 className="text-3xl font-bold text-[#C0974D] mb-3">
+              Tim Ahli & Staf
+            </h3>
+            <p className="text-[#EEECE4]/85">
+              Sejak awal, Balale didukung oleh peneliti, pendidik, kurator,
+              kreator, serta praktisi teknologi dari berbagai institusi. Tim ini
+              mengkurasi konten, merancang pengalaman belajar, dan menjaga
+              kualitas program.
+            </p>
+          </motion.div>
+          <motion.ul
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.1 }}
+            className="space-y-3"
+          >
+            {[
+              "Kurator budaya & sejarawan lokal",
+              "Pengembang produk & desainer pengalaman",
+              "Engineer untuk platform digital & data",
+              "Fasilitator workshop dan pelatihan UMKM",
+            ].map((t) => (
+              <li
+                key={t}
+                className="rounded-xl bg-white/10 ring-1 ring-white/10 px-4 py-3"
+              >
+                {t}
+              </li>
+            ))}
+          </motion.ul>
+        </div>
+      </section>
+
+      {/* Section 8 — Komunitas Member & Research Teachers */}
+      <section className="py-24">
+        <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-start">
+          <motion.div {...fadeUp}>
+            <h3 className="text-3xl font-bold mb-3">
+              Balale Member & Research Teachers Community
+            </h3>
+            <p className="text-[#1C2C4B]/80">
+              Balale memiliki komunitas anggota dan pendidik-peneliti yang
+              tersebar di Indonesia. Komunitas ini mewadahi riset budaya,
+              eksperimen pembelajaran kreatif, serta kolaborasi proyek antar
+              sekolah, kampus, dan komunitas.
+            </p>
+          </motion.div>
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.1 }}
+            className="rounded-2xl bg-white ring-1 ring-black/5 p-6 shadow-[0_8px_30px_rgba(28,44,75,0.10)]"
+          >
+            <div className="grid grid-cols-2 gap-4 text-center">
+              {[
+                { k: "Anggota Aktif", v: "1.200+" },
+                { k: "Guru/Riset", v: "180+" },
+                { k: "Kota/Komunitas", v: "40+" },
+                { k: "Program/Riset", v: "65+" },
+              ].map((s) => (
+                <div key={s.k} className="rounded-xl bg-[#F9F8F4] p-4">
+                  <div className="text-xs text-[#1C2C4B]/60">{s.k}</div>
+                  <div className="text-lg font-semibold">{s.v}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Section 9 — Program/Events Detail ala katalog */}
+      <section className="bg-[#F9F8F4] py-24">
+        <div className="container mx-auto px-6 md:px-12">
+          <motion.h3 {...fadeUp} className="text-3xl font-bold mb-8">
+            Program / Event Balale
+          </motion.h3>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Kolom 1: Regional & Nasional */}
+            <div className="space-y-3">
+              <div className="text-[#C0974D] font-semibold">
+                Regional & Nasional
+              </div>
+              {[
+                "Festival Dolanan Nusantara (FDN)",
+                "Nusantara Creative Meet-Up (NCM)",
+                "Indonesian Craft Expo (ICE)",
+                "Balale Innovation Camp (BIC)",
+                "Heritage Game Jam (HGJ)",
+              ].map((t) => (
+                <div
+                  key={t}
+                  className="rounded-xl bg-white ring-1 ring-black/5 px-4 py-3"
+                >
+                  {t}
+                </div>
+              ))}
+            </div>
+
+            {/* Kolom 2: Internasional */}
+            <div className="space-y-3">
+              <div className="text-[#C0974D] font-semibold">Internasional</div>
+              {[
+                "Global Digital Heritage Week (GDHW)",
+                "Craft & Code World Forum (CCWF)",
+                "Youth Culture Innovation Awards (YCIA)",
+                "ASEAN Cultural Hackfest (ACH)",
+              ].map((t) => (
+                <div
+                  key={t}
+                  className="rounded-xl bg-white ring-1 ring-black/5 px-4 py-3"
+                >
+                  {t}
+                </div>
+              ))}
+            </div>
+
+            {/* Kolom 3: Olimpiade/Kompetisi & Non-Kompetisi */}
+            <div className="space-y-3">
+              <div className="text-[#C0974D] font-semibold">
+                Olimpiade & Non-Kompetisi
+              </div>
+              {[
+                "Balale Olympiad Tingkat Nasional (BOTN)",
+                "Balale Young Innovators (BYI)",
+                "Balale Research Portal & Open Course",
+                "Balale Goes To School / Campus Corner",
+                "Newsletter & Insight Budaya",
+              ].map((t) => (
+                <div
+                  key={t}
+                  className="rounded-xl bg-white ring-1 ring-black/5 px-4 py-3"
+                >
+                  {t}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 10 — Kemitraan */}
+      <section className="py-24">
+        <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12">
+          <motion.div {...fadeUp}>
+            <h3 className="text-3xl font-bold mb-3">National Partner</h3>
+            <p className="text-[#1C2C4B]/80 mb-4">
+              Dalam implementasi program, Balale berkolaborasi dengan
+              kementerian/lembaga, pemerintah daerah, serta perguruan tinggi dan
+              mitra industri di Indonesia.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {[
+                "Kemdikbudristek",
+                "Kemenparekraf",
+                "Pemda/Disbud",
+                "Perguruan Tinggi",
+                "BUMN/BUMD",
+              ].map((l) => (
+                <span
+                  key={l}
+                  className="rounded-full bg-[#1C2C4B] text-white ring-1 ring-black/5 px-4 py-2 text-sm"
+                >
+                  {l}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.1 }}
+          >
+            <h3 className="text-3xl font-bold mb-3">International Partner</h3>
+            <p className="text-[#1C2C4B]/80 mb-4">
+              Balale juga bekerja sama dengan jaringan global di Asia, Eropa,
+              Amerika, dan Afrika untuk membuka kesempatan kolaborasi lintas
+              negara.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {[
+                "UNESCO-aligned NGOs",
+                "Museum/Archive",
+                "Universitas Global",
+                "Platform Edu Digital",
+                "Cultural Labs",
+              ].map((l) => (
+                <span
+                  key={l}
+                  className="rounded-full bg-[#1C2C4B] text-white ring-1 ring-black/5 px-4 py-2 text-sm"
+                >
+                  {l}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Footer */}
+        <section className="bg-[#1C2C4B] text-[#EEECE4] py-16">
+        <div className="container mx-auto px-6 md:px-12 text-center">
+            <motion.h3
+            {...fadeUp}
+            className="text-2xl md:text-3xl font-bold"
+            >
+            Bergabung dengan Ekosistem Balale
+            </motion.h3>
+            <motion.p
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.1 }}
+            className="mt-2 text-[#EEECE4]/85"
+            >
+            Jadilah bagian dari gerakan pelestarian budaya dan inovasi kreatif.
+            Mari ciptakan dampak yang berkelanjutan bersama-sama.
+            </motion.p>
+            <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.15 }}
+            className="mt-6 flex justify-center gap-3"
+            >
+            <a
+                href="/join"
+                className="inline-flex items-center rounded-xl bg-[#C0974D] hover:bg-[#a4813d] px-5 py-3 font-semibold text-white shadow transition"
+            >
+                Gabung Komunitas
+            </a>
+            <a
+                href="/partners"
+                className="inline-flex items-center rounded-xl bg-transparent ring-1 ring-white/40 px-5 py-3 font-semibold hover:bg-white/10 transition"
+            >
+                Kemitraan
+            </a>
+            </motion.div>
+        </div>
+        </section>
+
+    </main>
+  );
+}

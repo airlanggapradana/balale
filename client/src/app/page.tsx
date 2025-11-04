@@ -1,11 +1,33 @@
-import { Hero } from "@/components/landing-page/Hero";
-import About from "@/components/landing-page/About";
+import {
+  // Hero,
+  About,
+  VisionMission,
+  Curation,
+  Event,
+  NationalAffiliation,
+  InternationalAffiliation,
+  MediaPartner,
+  Newsletter,
+} from "@/components/home";
+
+export const metadata = {
+  title: "Balale.id – Edukasi, Inovasi, Kolaborasi",
+  description:
+    "Platform kolaboratif untuk edukasi, inovasi, dan pengembangan produk lokal berdaya saing global.",
+};
 
 export default function HomePage() {
   return (
-    <>
-      <Hero />
+    <main className="flex flex-col gap-16 overflow-hidden">
+      {/* <Hero /> */}
       <About />
-    </>
+      <VisionMission />
+      <Curation />
+      <Event />
+      <NationalAffiliation />
+      <InternationalAffiliation />
+      <MediaPartner />
+      <Newsletter />
+    </main>
   );
 }
