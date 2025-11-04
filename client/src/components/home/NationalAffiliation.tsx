@@ -80,7 +80,7 @@ export default function NationalAffiliation() {
   return (
     <section className="relative py-20 bg-[#1C2C4B] overflow-hidden">
       {/* Aksen latar belakang */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#111E34] via-[#1C2C4B] to-[#223A5C] opacity-95" />
+      <div className="absolute inset-0 bg-linear-to-b from-[#111E34] via-[#1C2C4B] to-[#223A5C] opacity-95" />
       <div className="absolute right-0 top-0 w-64 h-64 bg-[#C0974D]/20 blur-3xl rounded-full mix-blend-overlay" />
       <div className="absolute left-0 bottom-0 w-80 h-80 bg-[#077377]/20 blur-3xl rounded-full mix-blend-overlay" />
 

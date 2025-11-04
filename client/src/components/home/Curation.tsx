@@ -7,7 +7,7 @@ export default function Curation() {
       id="company-profile"
     >
       {/* Aksen latar belakang (gradasi & dekorasi halus) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#111E34] via-[#1C2C4B] to-[#223A5C] opacity-95" />
+      <div className="absolute inset-0 bg-linear-to-br from-[#111E34] via-[#1C2C4B] to-[#223A5C] opacity-95" />
       <div className="absolute right-0 top-0 w-64 h-64 bg-[#C0974D]/20 blur-3xl rounded-full mix-blend-overlay" />
       <div className="absolute left-0 bottom-0 w-80 h-80 bg-[#077377]/20 blur-3xl rounded-full mix-blend-overlay" />
 
@@ -68,7 +68,7 @@ export default function Curation() {
             <div className="pt-4">
               <a
                 href="https://balale.id/about"
-                className="inline-block bg-[#C0974D] text-[#1C2C4B] font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-[#E9D2A0] transition-all duration-300"
+                className="inline-block bg-[#C0974D] text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-[#E9D2A0] transition-all duration-300"
               >
                 Pelajari Lebih Lanjut
               </a>

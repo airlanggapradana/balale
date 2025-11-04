@@ -8,7 +8,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="bg-white pt-32 pb-20" // lebih banyak space dari atas
+      className=" pt-32 pb-20" // lebih banyak space dari atas
     >
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -23,7 +23,7 @@ const About = () => {
             </h1>
             <h5 className="text-xl md:text-xl font-bold text-[#C0974D] leading-snug">Platform kolaboratif untuk edukasi, inovasi, dan pengembangan produk lokal berdaya saing global.</h5>
 
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-black leading-relaxed">
               <span className="font-medium">Balale.id</span> adalah platform digital yang berfokus
               pada digitalisasi permainan tradisional Indonesia serta pemberdayaan pengrajin kriya
               lokal melalui pemasaran daring dan pembelajaran interaktif berbasis budaya.
@@ -34,7 +34,7 @@ const About = () => {
               interaktif sebagai media pengenalan budaya.
             </p>
 
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-black leading-relaxed">
               Sejak dikembangkan, Balale.id berkomitmen mendukung pelestarian budaya Indonesia
               sesuai amanat{" "}
               <span className="font-bold">

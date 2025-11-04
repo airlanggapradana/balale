@@ -6,12 +6,12 @@ const Education = () => {
   return (
     <section
       id="education"
-      className="relative py-24 bg-[#1C2C4B] text-[#EEECE4] overflow-hidden"
+      className="relative py-24 text-[#EEECE4] overflow-hidden"
     >
-      {/* Latar belakang gradasi & aksen */}
+      {/* Latar belakang gradasi & aksen
       <div className="absolute inset-0 bg-linear-to-b from-[#111E34] via-[#1C2C4B] to-[#223A5C] opacity-95" />
       <div className="absolute right-0 top-0 w-64 h-64 bg-[#C0974D]/25 blur-3xl rounded-full mix-blend-overlay animate-pulse" />
-      <div className="absolute left-0 bottom-0 w-96 h-96 bg-[#077377]/25 blur-3xl rounded-full mix-blend-overlay animate-pulse" />
+      <div className="absolute left-0 bottom-0 w-96 h-96 bg-[#077377]/25 blur-3xl rounded-full mix-blend-overlay animate-pulse" /> */}
 
       {/* Konten utama */}
       <div className="relative container mx-auto px-6 md:px-12 z-10">
@@ -23,10 +23,10 @@ const Education = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[#EEECE4] tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-black tracking-tight">
             Education & Cultural Learning
           </h1>
-          <p className="mt-4 text-[#EEECE4]/80 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+          <p className="mt-4 text-black text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
             Balale.id menghadirkan ruang pembelajaran interaktif yang
             memadukan <strong>edukasi budaya, kreativitas,</strong> dan{" "}
             <strong>teknologi berkelanjutan.</strong>  
@@ -91,14 +91,14 @@ const Education = () => {
           viewport={{ once: true }}
           className="text-center mt-20"
         >
-          <p className="text-[#EEECE4]/80 mb-6 max-w-xl mx-auto leading-relaxed">
+          <p className="text-black mb-6 max-w-xl mx-auto leading-relaxed">
             Kami percaya bahwa pengetahuan budaya adalah akar dari setiap
             kemajuan. Mari membangun masa depan dengan kebijaksanaan tradisi dan
             kekuatan inovasi.
           </p>
           <a
             href="/education/modules"
-            className="inline-block bg-[#C0974D] text-[#1C2C4B] px-8 py-3 rounded-full font-semibold hover:bg-[#E9D2A0] transition-all duration-300 shadow-lg"
+            className="inline-block bg-[#C0974D] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#E9D2A0] transition-all duration-300 shadow-lg"
           >
             Pelajari Lebih Lanjut
           </a>

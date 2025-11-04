@@ -53,14 +53,14 @@ const Header: React.FC = () => {
     document.body.classList.toggle("overflow-hidden", mobileOpen);
   }, [mobileOpen]);
 
-
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(href + "/");
 
   const toggleSub = (k: string) => setOpenSub((s) => ({ ...s, [k]: !s[k] }));
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white backdrop-blur-md border-b text-[#1C2C4B]">
+    // Mobile: gelap; Desktop: putih
+    <header className="fixed inset-x-0 top-0 z-50 border-b bg-[#0F223B] text-white backdrop-blur md:bg-white md:text-[#1C2C4B]">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         {/* Brand */}
         <button
@@ -68,25 +68,25 @@ const Header: React.FC = () => {
           className="flex items-center gap-3"
           aria-label="Go to homepage"
         >
-          <div className="flex h-full w-full items-center justify-center rounded-md bg-white">
+          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white md:bg-transparent">
             <Image
               src={BalaleLogo as string}
               alt="Balale Logo"
               className="object-contain"
               priority
-              width={50}
-              height={50}
+              width={36}
+              height={36}
             />
           </div>
           <span className="text-xl font-bold tracking-tight">
-            <span style={{ color: "#1C2C4B" }}>Balale</span>
-            <span style={{ color: "#C0974D" }}>.</span>
-            <span style={{ color: "#C0974D" }}>id</span>
+            <span className="text-white md:text-[#1C2C4B]">Balale</span>
+            <span className="text-[#C0974D]">.</span>
+            <span className="text-[#C0974D]">id</span>
           </span>
         </button>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden items-center gap-6 md:flex">
           <Link
             href="/"
             aria-current={isActive("/") ? "page" : undefined}
@@ -111,7 +111,7 @@ const Header: React.FC = () => {
             href="/education"
             aria-current={isActive("/education") ? "page" : undefined}
             className={`font-semibold transition-colors ${
-              isActive("/calenderevent") ? "text-[#C0974D]" : "text-gray-700"
+              isActive("/education") ? "text-[#C0974D]" : "text-gray-700"
             } hover:text-[#C0974D]`}
           >
             Education
@@ -119,46 +119,53 @@ const Header: React.FC = () => {
 
           <Link
             href="/products"
-            aria-current={isActive("/e-commerce") ? "page" : undefined}
+            aria-current={isActive("/products") ? "page" : undefined}
             className={`font-semibold transition-colors ${
-              isActive("/e-commerce") ? "text-[#C0974D]" : "text-gray-700"
+              isActive("/products") ? "text-[#C0974D]" : "text-gray-700"
             } hover:text-[#C0974D]`}
           >
             Product
           </Link>
 
           {/* Our Team */}
-          <div className="relative group">
-            <button className="flex items-center gap-1 font-bold text-gray-700 hover:text-[#C0974D] transition-colors">
+          <div className="group relative">
+            <button className="flex items-center gap-1 font-bold text-gray-700 transition-colors hover:text-[#C0974D]">
               Our Team <ChevronDown className="h-4 w-4" />
             </button>
+
             <ul className="invisible absolute left-0 mt-2 min-w-56 rounded-lg border bg-white p-2 opacity-0 shadow-lg transition-all duration-150 group-hover:visible group-hover:opacity-100">
               <li>
                 <Link
-                  href="/expertteam"
-                  className="block rounded-md px-3 py-2 text-gray-950 hover:bg-orange-50 hover:text-[#C0974D] text-center"
+                  href="/team"
+                  className="block rounded-md px-3 py-2 text-center font-semibold text-gray-900 transition-all duration-300 hover:bg-[#EEECE4] hover:text-[#C0974D]"
                 >
                   Balale Expert Team
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/team/staff"
+                  className="block rounded-md px-3 py-2 text-center font-semibold text-gray-900 transition-all duration-300 hover:bg-[#EEECE4] hover:text-[#C0974D]"
+                >
+                  Balale Staff
                 </Link>
               </li>
             </ul>
           </div>
 
-          <Link
-            href="/newsletterpage"
-            aria-current={isActive("/newsletterpage") ? "page" : undefined}
+          {/* <Link
+            href="/newsletter"
+            aria-current={isActive("/newsletter") ? "page" : undefined}
             className={`font-semibold transition-colors ${
-              isActive("/newsletterpage")
-                ? "text-[#C0974D]"
-                : "text-gray-700"
+              isActive("/newsletter") ? "text-[#C0974D]" : "text-gray-700"
             } hover:text-[#C0974D]`}
           >
             Newsletter
-          </Link>
+          </Link> */}
 
           {/* Gallery */}
-          <div className="relative group">
-            <button className="flex items-center gap-1 font-semibold text-gray-700 hover:text-[#C0974D] transition-colors">
+          <div className="group relative">
+            <button className="flex items-center gap-1 font-semibold text-gray-700 transition-colors hover:text-[#C0974D]">
               Gallery <ChevronDown className="h-4 w-4" />
             </button>
             <ul className="invisible absolute left-0 mt-2 min-w-56 rounded-lg border bg-white p-2 opacity-0 shadow-lg transition-all duration-150 group-hover:visible group-hover:opacity-100">
@@ -203,7 +210,7 @@ const Header: React.FC = () => {
         </nav>
 
         {/* Right actions (desktop) */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden items-center gap-3 md:flex">
           {isLoggedIn ? (
             <>
               <button
@@ -213,7 +220,7 @@ const Header: React.FC = () => {
                 <ShoppingCart className="h-5 w-5 text-[#1C2C4B]" />
               </button>
               <button
-                className="rounded-md bg-orange-500 px-3 py-2 text-white hover:bg-orange-600"
+                className="rounded-md bg-[#C0974D] px-3 py-2 text-white hover:bg-[#bc9c61]"
                 onClick={() => {
                   localStorage.removeItem("currentUser");
                   window.dispatchEvent(new Event("authChange"));
@@ -224,10 +231,9 @@ const Header: React.FC = () => {
             </>
           ) : (
             <>
-              {/* ✅ fix warna tombol Masuk */}
               <button
                 onClick={() => router.push("/auth")}
-                className="rounded-md border border-[#EEECE4] bg-white px-3 py-2 text-[#1C2C4B] hover:bg-[#EEECE4]/70 flex items-center gap-2 transition"
+                className="flex items-center gap-2 rounded-md border border-[#EEECE4] bg-white px-3 py-2 text-[#1C2C4B] transition hover:bg-[#EEECE4]/70"
               >
                 <LogIn className="h-4 w-4" />
                 Masuk
@@ -244,7 +250,7 @@ const Header: React.FC = () => {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden rounded-xl p-2.5 bg-[#1C2C4B]/90 text-white shadow-sm hover:shadow-md ring-1 ring-[#1C2C4B]/30 transition active:scale-95"
+          className="rounded-xl p-2.5 text-white ring-1 ring-white/20 transition hover:bg-white/10 active:scale-95 md:hidden"
           onClick={() => setMobileOpen(true)}
           aria-label="Open menu"
         >
@@ -253,216 +259,256 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Drawer */}
-      {/* Mobile drawer */}
+      <div
+        className={`fixed inset-0 z-60 md:hidden ${
+          mobileOpen ? "visible" : "invisible"
+        }`}
+        aria-hidden={!mobileOpen}
+      >
+        {/* Overlay gelap */}
         <div
-          className={`fixed inset-0 z-60 md:hidden ${mobileOpen ? "visible" : "invisible"}`}
-          aria-hidden={!mobileOpen}
+          className={`absolute inset-0 bg-black/70 transition-opacity ${
+            mobileOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setMobileOpen(false)}
+        />
+
+        {/* Panel: SOLID biru tua, bukan transparan */}
+        <aside
+          className={`absolute left-0 top-0 h-full w-[84%] max-w-sm
+          bg-[#0F223B] text-[#F3F5F9]
+          ring-1 ring-white/10
+          shadow-[0_24px_80px_rgba(0,0,0,0.65)]
+          transition-transform duration-300 ease-in-out
+          ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+          role="dialog"
+          aria-modal="true"
         >
-          {/* Overlay (lebih tebal) */}
-          <div
-            className={`absolute inset-0 transition-opacity ${
-              mobileOpen ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-            onClick={() => setMobileOpen(false)}
-          />
-
-          {/* Panel */}
-          <aside
-            className={`absolute left-0 top-0 h-full w-[84%] max-w-sm bg-white shadow-2xl
-            transition-transform duration-300 ease-in-out
-            ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
-            role="dialog"
-            aria-modal="true"
-          >
-            {/* Top bar */}
-            <div className="flex items-center justify-between px-4 h-16 border-b border-gray-200">
-              <div className="flex items-center gap-3">
-                <div
-                  className="flex h-10 w-10 items-center justify-center rounded-lg p-0.5"
-                  style={{ backgroundImage: "linear-gradient(135deg, #C0974D, #1C2C4B)" }}
-                >
-                  <div className="flex h-full w-full items-center justify-center rounded-md bg-white">
-                    <Image
-                      src="/assets/images/logo/about-logo.png"
-                      alt="Balale Logo"
-                      width={22}
-                      height={22}
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
-                </div>
-                <span className="font-bold text-lg tracking-tight">
-                  <span style={{ color: "#C0974D" }}>Balale</span>
-                  <span style={{ color: "#C0974D" }}>.</span>
-                  <span style={{ color: "#3E6398" }}>id</span>
-                </span>
+          {/* Top bar */}
+          <div className="flex h-16 items-center justify-between border-b border-white/10 px-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white">
+                <Image
+                  src={BalaleLogo as string}
+                  alt="Balale Logo"
+                  width={22}
+                  height={22}
+                  className="object-contain"
+                  priority
+                />
               </div>
-
-              {/* Close (bg tebal) */}
-              <button
-                className="
-                  rounded-xl p-2.5
-                  bg-[#1C2C4B]/90 text-white
-                  shadow-sm hover:shadow-md
-                  transition active:scale-95
-                "
-                onClick={() => setMobileOpen(false)}
-                aria-label="Close menu"
-              >
-                <X className="h-6 w-6" />
-              </button>
+              <span className="text-lg font-bold tracking-tight">
+                <span className="text-white">Balale</span>
+                <span className="text-[#C0974D]">.</span>
+                <span className="text-[#C0974D]">id</span>
+              </span>
             </div>
 
-            {/* Nav list */}
-            <nav className="p-3 overflow-y-auto max-h-[calc(100vh-4rem)]">
-              <ul className="space-y-1">
-                <li>
-                  <Link
-                    href="/"
-                    className="flex items-center gap-2 rounded-md px-3 py-2 hover:bg-[#EEECE4]"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    <Home className="h-4 w-4 text-[#1C2C4B]" /> Home
-                  </Link>
-                </li>
+            <button
+              className="rounded-xl bg-white/10 p-2.5 text-white ring-1 ring-white/15 transition hover:bg-white/20 active:scale-95"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close menu"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
 
-                <li>
-                  <Link
-                    href="/About"
-                    className="block rounded-md px-3 py-2 hover:bg-[#EEECE4]"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    About
-                  </Link>
-                </li>
+          {/* Nav list */}
+          <nav className="max-h-[calc(100vh-4rem)] overflow-y-auto p-3">
+            <ul className="space-y-1">
+              <li>
+                <Link
+                  href="/"
+                  className="flex items-center gap-2 rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <Home className="h-4 w-4 text-white" /> Home
+                </Link>
+                <div className="mx-3 mt-2 border-b border-white/10" />
+              </li>
 
-                {/* Accordion: Our Team */}
-                <li>
-                  <button
-                    className="flex w-full items-center justify-between rounded-md px-3 py-2 hover:bg-[#EEECE4]"
-                    onClick={() => toggleSub("team")}
-                    aria-expanded={!!openSub.team}
-                  >
-                    <span>Our Team</span>
-                    <ChevronDown
-                      className={`h-4 w-4 text-[#1C2C4B] transition-transform ${
-                        openSub.team ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                  {openSub.team && (
-                    <ul className="ml-3 mt-1 space-y-1 border-l pl-3 border-[#EEECE4]">
-                      <li>
-                        <Link
-                          href="/ExpertTeam"
-                          className="block rounded-md px-3 py-2 hover:bg-[#EEECE4] text-center"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          Balale Expert Team
-                        </Link>
-                      </li>
-                    </ul>
-                  )}
-                </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="block rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  About
+                </Link>
+                <div className="mx-3 mt-2 border-b border-white/10" />
+              </li>
 
-                <li>
-                  <Link
-                    href="/NewsletterPage"
-                    className="block rounded-md px-3 py-2 hover:bg-[#EEECE4]"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    Newsletter
-                  </Link>
-                </li>
-
-                {/* Accordion: Gallery */}
-                <li>
-                  <button
-                    className="flex w-full items-center justify-between rounded-md px-3 py-2 hover:bg-[#EEECE4]"
-                    onClick={() => toggleSub("gallery")}
-                    aria-expanded={!!openSub.gallery}
-                  >
-                    <span>Gallery</span>
-                    <ChevronDown
-                      className={`h-4 w-4 text-[#1C2C4B] transition-transform ${
-                        openSub.gallery ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                  {openSub.gallery && (
-                    <ul className="ml-3 mt-1 space-y-1 border-l pl-3 border-[#EEECE4]">
-                      <li>
-                        <Link
-                          href="/GalleryPhoto"
-                          className="block rounded-md px-3 py-2 hover:bg-[#EEECE4]"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          Photo Events
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="/GalleryVideo"
-                          className="block rounded-md px-3 py-2 hover:bg-[#EEECE4]"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          Video Events
-                        </Link>
-                      </li>
-                    </ul>
-                  )}
-                </li>
-
-                <li><Link href="/FaqPage" className="block rounded-md px-3 py-2 hover:bg-[#EEECE4]" onClick={() => setMobileOpen(false)}>FAQ</Link></li>
-                <li><Link href="/ContactPage" className="block rounded-md px-3 py-2 hover:bg-[#EEECE4]" onClick={() => setMobileOpen(false)}>Contact Us</Link></li>
-
-                {/* Actions */}
-                <li className="mt-3 border-t border-[#EEECE4] pt-3 flex gap-2">
-                  {isLoggedIn ? (
-                    <>
-                      <button
-                        onClick={() => { router.push("/carts"); setMobileOpen(false); }}
-                        className="flex-1 rounded-md border border-[#EEECE4] px-3 py-2 hover:bg-[#EEECE4] flex items-center justify-center gap-2"
+              {/* Accordion: Our Team */}
+              <li>
+                <button
+                  className="flex w-full items-center justify-between rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  onClick={() => toggleSub("team")}
+                  aria-expanded={!!openSub.team}
+                >
+                  <span>Our Team</span>
+                  <ChevronDown
+                    className={`h-4 w-4 text-white transition-transform ${
+                      openSub.team ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {openSub.team && (
+                  <ul className="ml-3 mt-1 space-y-1 border-l border-white/10 pl-3">
+                    <li>
+                      <Link
+                        href="/team"
+                        className="block rounded-md px-3 py-2 text-center text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                        onClick={() => setMobileOpen(false)}
                       >
-                        <ShoppingCart className="h-5 w-5 text-[#1C2C4B]" /> Carts
-                      </button>
-                      <button
-                        onClick={() => { localStorage.removeItem("currentUser"); window.dispatchEvent(new Event("authChange")); setMobileOpen(false); }}
-                        className="flex-1 rounded-md bg-[#C0974D] text-white px-3 py-2 hover:bg-[#1C2C4B] transition"
+                        Balale Expert Team
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/team/staff"
+                        className="block rounded-md px-3 py-2 text-center text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                        onClick={() => setMobileOpen(false)}
                       >
-                        <LogOut className="mr-2 inline h-5 w-5" /> Logout
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        onClick={() => { router.push("/auth"); setMobileOpen(false); }}
-                        className="flex-1 rounded-md border border-[#EEECE4] px-3 py-2 hover:bg-[#EEECE4] flex items-center justify-center gap-2"
-                      >
-                        <LogIn className="h-5 w-5 text-[#1C2C4B]" /> Masuk
-                      </button>
-                      <button
-                        onClick={() => { router.push("/auth"); setMobileOpen(false); }}
-                        className="flex-1 rounded-md bg-[#1C2C4B] text-white px-3 py-2 hover:bg-[#C0974D] transition"
-                      >
-                        Daftar
-                      </button>
-                    </>
-                  )}
-                </li>
-              </ul>
-            </nav>
-          </aside>
-        </div>
+                        Balale Staff
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+                <div className="mx-3 mt-2 border-b border-white/10" />
+              </li>
 
-          
+              {/*<li>
+                 <Link
+                  href="/newsletter"
+                  className="block rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Newsletter
+                </Link>
+                <div className="mx-3 mt-2 border-b border-white/10" />
+              </li> */}
+
+              {/* Accordion: Gallery */}
+              <li>
+                <button
+                  className="flex w-full items-center justify-between rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  onClick={() => toggleSub("gallery")}
+                  aria-expanded={!!openSub.gallery}
+                >
+                  <span>Gallery</span>
+                  <ChevronDown
+                    className={`h-4 w-4 text-white transition-transform ${
+                      openSub.gallery ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {openSub.gallery && (
+                  <ul className="ml-3 mt-1 space-y-1 border-l border-white/10 pl-3">
+                    <li>
+                      <Link
+                        href="/gallery/photos"
+                        className="block rounded-md px-3 py-2 text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        Photo Events
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/gallery/videos"
+                        className="block rounded-md px-3 py-2 text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        Video Events
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+                <div className="mx-3 mt-2 border-b border-white/10" />
+              </li>
+
+              <li>
+                <Link
+                  href="/faqpage"
+                  className="block rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  FAQ
+                </Link>
+                <div className="mx-3 mt-2 border-b border-white/10" />
+              </li>
+
+              <li>
+                <Link
+                  href="/contactpage"
+                  className="block rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Contact Us
+                </Link>
+                <div className="mx-3 mt-2 border-b border-white/10" />
+              </li>
+
+              {/* Actions */}
+              <li className="mt-3 flex gap-2 border-t border-white/10 pt-3">
+                {isLoggedIn ? (
+                  <>
+                    <button
+                      onClick={() => {
+                        router.push("/carts");
+                        setMobileOpen(false);
+                      }}
+                      className="flex-1 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-3 py-2 font-semibold text-white transition hover:bg-white/10"
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        <ShoppingCart className="h-5 w-5 text-white" />
+                        Carts
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        localStorage.removeItem("currentUser");
+                        window.dispatchEvent(new Event("authChange"));
+                        setMobileOpen(false);
+                      }}
+                      className="flex-1 rounded-md bg-[#C0974D] px-3 py-2 font-semibold text-white transition hover:bg-[#a7813b]"
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        <LogOut className="h-5 w-5" /> Logout
+                      </span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => {
+                        router.push("/auth");
+                        setMobileOpen(false);
+                      }}
+                      className="flex-1 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-3 py-2 font-semibold text-white transition hover:bg-white/10"
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        <LogIn className="h-5 w-5 text-white" /> Masuk
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        router.push("/auth");
+                        setMobileOpen(false);
+                      }}
+                      className="flex-1 rounded-md bg-[#C0974D] px-3 py-2 font-semibold text-white transition hover:bg-[#a7813b]"
+                    >
+                      Daftar
+                    </button>
+                  </>
+                )}
+              </li>
+            </ul>
+          </nav>
+        </aside>
+      </div>
     </header>
   );
 };
 
 export default Header;
-
-
-        
