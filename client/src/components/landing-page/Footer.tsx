@@ -123,10 +123,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope,
-  faArrowRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookF,
   faInstagram,
@@ -140,14 +137,14 @@ import BalaleLogo from "../../assets/images/logo/about-logo.png";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#3472ee] text-[#EEECE4] pt-16 pb-8 overflow-hidden">
+    <footer className="relative overflow-hidden bg-[#3472ee] pt-16 pb-8 text-[#EEECE4]">
       {/* Aksen visual */}
       <div className="absolute inset-0 bg-linear-to-t from-[#060e30] via-[#060e30] to-[#060e30] opacity-95" />
-      <div className="absolute right-0 top-0 w-64 h-64 bg-[#C0974D]/20 blur-3xl rounded-full mix-blend-overlay" />
-      <div className="absolute left-0 bottom-0 w-80 h-80 bg-[#077377]/20 blur-3xl rounded-full mix-blend-overlay" />
+      <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-[#C0974D]/20 mix-blend-overlay blur-3xl" />
+      <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-[#077377]/20 mix-blend-overlay blur-3xl" />
 
       {/* Konten utama */}
-      <div className="relative container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-10 z-10">
+      <div className="relative z-10 container mx-auto grid grid-cols-1 gap-10 px-6 md:grid-cols-4 md:px-12">
         {/* Kolom 1 - Logo & deskripsi */}
         <div>
           <Image
@@ -157,25 +154,25 @@ export default function Footer() {
             height={60}
             className="mb-4"
           />
-          <p className="text-[#EEECE4]/85 leading-relaxed text-justify">
-            <strong>Balale.id</strong> adalah platform kolaboratif untuk edukasi,
-            inovasi, dan pengembangan produk lokal berdaya saing global. Kami
-            menjembatani budaya, teknologi, dan kreativitas generasi muda
-            Indonesia untuk pelestarian dan kemajuan bersama.
+          <p className="text-justify leading-relaxed text-[#EEECE4]/85">
+            <strong>Balale.id</strong> adalah platform kolaboratif untuk
+            edukasi, inovasi, dan pengembangan produk lokal berdaya saing
+            global. Kami menjembatani budaya, teknologi, dan kreativitas
+            generasi muda Indonesia untuk pelestarian dan kemajuan bersama.
           </p>
         </div>
 
         {/* Kolom 2 - Kantor */}
         <div>
-          <h3 className="text-lg font-semibold text-[#C0974D] mb-4 relative">
+          <h3 className="relative mb-4 text-lg font-semibold text-[#C0974D]">
             Kantor
-            <span className="absolute left-0 bottom-0 w-12 h-0.5 bg-[#C0974D]" />
+            <span className="absolute bottom-0 left-0 h-0.5 w-12 bg-[#C0974D]" />
           </h3>
           <a
             href="https://goo.gl/maps/9x18coXGCmSscKec6"
             target="_blank"
             rel="noreferrer"
-            className="block text-[#EEECE4]/85 hover:text-[#C0974D] transition-colors duration-300 text-justify"
+            className="block text-justify text-[#EEECE4]/85 transition-colors duration-300 hover:text-[#C0974D]"
           >
             Jl. Wijilan No. 45, Panembahan, Kraton,
             <br /> Kota Yogyakarta, Daerah Istimewa Yogyakarta 55131
@@ -201,23 +198,23 @@ export default function Footer() {
 
         {/* Kolom 3 - Tautan */}
         <div>
-          <h3 className="text-lg font-semibold text-[#C0974D] mb-4 relative">
+          <h3 className="relative mb-4 text-lg font-semibold text-[#C0974D]">
             Tautan
-            <span className="absolute left-0 bottom-0 w-12 h-0.5 bg-[#C0974D]" />
+            <span className="absolute bottom-0 left-0 h-0.5 w-12 bg-[#C0974D]" />
           </h3>
           <ul className="space-y-2">
             <li>
-              <a
+              <Link
                 href="/"
-                className="hover:text-[#C0974D] transition-colors duration-300"
+                className="transition-colors duration-300 hover:text-[#C0974D]"
               >
                 Beranda
-              </a>
+              </Link>
             </li>
             <li>
               <a
                 href="/about"
-                className="hover:text-[#C0974D] transition-colors duration-300"
+                className="transition-colors duration-300 hover:text-[#C0974D]"
               >
                 Tentang
               </a>
@@ -225,7 +222,7 @@ export default function Footer() {
             <li>
               <a
                 href="/ourteam"
-                className="hover:text-[#C0974D] transition-colors duration-300"
+                className="transition-colors duration-300 hover:text-[#C0974D]"
               >
                 Tim
               </a>
@@ -233,7 +230,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/newsletter"
-                className="hover:text-[#C0974D] transition-colors duration-300"
+                className="transition-colors duration-300 hover:text-[#C0974D]"
               >
                 Newsletter
               </Link>
@@ -241,7 +238,7 @@ export default function Footer() {
             <li>
               <a
                 href="/gallery"
-                className="hover:text-[#C0974D] transition-colors duration-300"
+                className="transition-colors duration-300 hover:text-[#C0974D]"
               >
                 Galeri
               </a>
@@ -251,9 +248,9 @@ export default function Footer() {
 
         {/* Kolom 4 - Newsletter */}
         <div>
-          <h3 className="text-lg font-semibold text-[#C0974D] mb-4 relative">
+          <h3 className="relative mb-4 text-lg font-semibold text-[#C0974D]">
             Newsletter
-            <span className="absolute left-0 bottom-0 w-12 h-0.5 bg-[#C0974D]" />
+            <span className="absolute bottom-0 left-0 h-0.5 w-12 bg-[#C0974D]" />
           </h3>
 
           <form
@@ -270,23 +267,23 @@ export default function Footer() {
               name="email"
               placeholder="Masukkan Email"
               required
-              className="w-full py-3 pl-10 pr-12 rounded-full bg-[#EEECE4]/10 border border-[#EEECE4]/20 text-[#EEECE4] placeholder-[#EEECE4]/60 focus:outline-none focus:ring-2 focus:ring-[#C0974D]"
+              className="w-full rounded-full border border-[#EEECE4]/20 bg-[#EEECE4]/10 py-3 pr-12 pl-10 text-[#EEECE4] placeholder-[#EEECE4]/60 focus:ring-2 focus:ring-[#C0974D] focus:outline-none"
             />
             <button
               type="submit"
-              className="absolute right-3 bg-[#C0974D] text-[#1C2C4B] p-2.5 rounded-full hover:bg-[#E9D2A0] transition-all duration-300"
+              className="absolute right-3 rounded-full bg-[#C0974D] p-2.5 text-[#1C2C4B] transition-all duration-300 hover:bg-[#E9D2A0]"
             >
               <FontAwesomeIcon icon={faArrowRight} />
             </button>
           </form>
 
           {/* Social Media */}
-          <div className="flex items-center gap-4 mt-6">
+          <div className="mt-6 flex items-center gap-4">
             <a
               href="https://www.instagram.com/balale.id"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-[#EEECE4]/10 hover:bg-[#C0974D] transition-all duration-300"
+              className="rounded-full bg-[#EEECE4]/10 p-2 transition-all duration-300 hover:bg-[#C0974D]"
             >
               <FontAwesomeIcon icon={faInstagram} className="text-[#EEECE4]" />
             </a>
@@ -294,7 +291,7 @@ export default function Footer() {
               href="https://www.youtube.com/@balaleid"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-[#EEECE4]/10 hover:bg-[#C0974D] transition-all duration-300"
+              className="rounded-full bg-[#EEECE4]/10 p-2 transition-all duration-300 hover:bg-[#C0974D]"
             >
               <FontAwesomeIcon icon={faYoutube} className="text-[#EEECE4]" />
             </a>
@@ -302,7 +299,7 @@ export default function Footer() {
               href="https://www.tiktok.com/@balale.id"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-[#EEECE4]/10 hover:bg-[#C0974D] transition-all duration-300"
+              className="rounded-full bg-[#EEECE4]/10 p-2 transition-all duration-300 hover:bg-[#C0974D]"
             >
               <FontAwesomeIcon icon={faTiktok} className="text-[#EEECE4]" />
             </a>
@@ -310,7 +307,7 @@ export default function Footer() {
               href="https://www.linkedin.com/company/balaleid"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-[#EEECE4]/10 hover:bg-[#C0974D] transition-all duration-300"
+              className="rounded-full bg-[#EEECE4]/10 p-2 transition-all duration-300 hover:bg-[#C0974D]"
             >
               <FontAwesomeIcon icon={faLinkedin} className="text-[#EEECE4]" />
             </a>
@@ -318,7 +315,7 @@ export default function Footer() {
               href="https://www.facebook.com/balale.id"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-[#EEECE4]/10 hover:bg-[#C0974D] transition-all duration-300"
+              className="rounded-full bg-[#EEECE4]/10 p-2 transition-all duration-300 hover:bg-[#C0974D]"
             >
               <FontAwesomeIcon icon={faFacebookF} className="text-[#EEECE4]" />
             </a>
@@ -326,13 +323,14 @@ export default function Footer() {
         </div>
       </div>
 
-      <hr className="my-8 border-[#EEECE4]/20 container mx-auto" />
+      <hr className="container mx-auto my-8 border-[#EEECE4]/20" />
 
       {/* Footer bawah */}
-      <div className="text-center text-[#ffffff] text-sm">
+      <div className="text-center text-sm text-[#ffffff]">
         © {new Date().getFullYear()} <strong>Balale.id</strong> — Platform
         Inovasi & Kebudayaan. Dikembangkan oleh{" "}
-        <span className="text-[#ffffff] font-semibold">Balale IT Division</span>.
+        <span className="font-semibold text-[#ffffff]">Balale IT Division</span>
+        .
       </div>
     </footer>
   );

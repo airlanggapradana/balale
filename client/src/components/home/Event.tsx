@@ -43,13 +43,14 @@ function toEventItem(x: unknown): EventItem | null {
   return {
     id: obj.id as string | number,
     title: obj.title as string,
-    subtitle: typeof obj.subtitle === "string" ? (obj.subtitle as string) : undefined,
-    category: typeof obj.category === "string" ? (obj.category as string) : undefined,
-    level: typeof obj.level === "string" ? (obj.level as string) : undefined,
-    location: typeof obj.location === "string" ? (obj.location as string) : undefined,
-    date: typeof obj.date === "string" ? (obj.date as string) : undefined,
+    subtitle: typeof obj.subtitle === "string" ? obj.subtitle : undefined,
+    category: typeof obj.category === "string" ? obj.category : undefined,
+    level: typeof obj.level === "string" ? obj.level : undefined,
+    location: typeof obj.location === "string" ? obj.location : undefined,
+    date: typeof obj.date === "string" ? obj.date : undefined,
     image,
-    description: typeof obj.description === "string" ? (obj.description as string) : undefined,
+    description:
+      typeof obj.description === "string" ? obj.description : undefined,
     link,
   };
 }
@@ -83,7 +84,7 @@ function getEvents(raw: unknown): EventItem[] {
       obj.collections !== null &&
       typeof (obj.collections as { events?: unknown[] }).events !== "undefined"
     ) {
-      return ((obj.collections as { events: unknown[] }).events)
+      return (obj.collections as { events: unknown[] }).events
         .map(toEventItem)
         .filter(Boolean) as EventItem[];
     }
@@ -101,7 +102,7 @@ export default function Event() {
       {/* Heading */}
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#1C2C4B]">
+          <h1 className="text-3xl font-bold text-[#1C2C4B] md:text-4xl">
             Our Balale Events
           </h1>
           <div className="mt-3 flex items-center justify-center">
@@ -125,7 +126,7 @@ export default function Event() {
                 <article
                   className={[
                     "group relative overflow-hidden rounded-2xl",
-                    "bg-white/10 backdrop-blur-md border border-transparent ring-1 ring-[#D9DFEA]",
+                    "border border-transparent bg-white/10 ring-1 ring-[#D9DFEA] backdrop-blur-md",
                     "shadow-[0_8px_30px_rgba(28,44,75,0.08)]",
                     "transition-all duration-500 ease-in-out",
                     "hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(28,44,75,0.25)] hover:ring-white/30",
@@ -199,7 +200,7 @@ export default function Event() {
         <div className="mt-8 text-center">
           <Link
             href="/AllEventPage"
-            className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold bg-[#C0974D] text-white hover:bg-[#1C2C4B] transition-colors duration-300"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C0974D] px-6 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#1C2C4B]"
           >
             Load More
           </Link>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, useMotionValue, useTransform } from "framer-motion";
+import type { Transition } from "framer-motion";
 
 // ===== Hover Founder Card =====
 type FounderProps = { name: string; role: string; img: string };
@@ -37,14 +38,14 @@ function FounderCard({ name, role, img }: FounderProps) {
       whileHover={{ y: -6, scale: 1.015 }}
       whileTap={{ scale: 0.995 }}
       transition={{ type: "spring", stiffness: 200, damping: 18 }}
-      className="group relative overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 p-6 shadow-[0_8px_30px_rgba(28,44,75,0.12)] transform-3d"
+      className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgba(28,44,75,0.12)] ring-1 ring-black/5 transform-3d"
     >
       {/* animated glow */}
       <motion.div
         aria-hidden
-        className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute inset-0 -z-10 opacity-0 transition-opacity group-hover:opacity-100"
         animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 4, repeat: Infinity, ease: [0, 0, 1, 1] }}
         style={{
           background:
             "linear-gradient(120deg, rgba(192,151,77,.28), rgba(28,44,75,.18), rgba(192,151,77,.28))",
@@ -52,7 +53,7 @@ function FounderCard({ name, role, img }: FounderProps) {
           filter: "blur(26px)",
         }}
       />
-      <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-[#C0974D]/20 blur-2xl" />
+      <div className="pointer-events-none absolute -top-8 -right-8 h-28 w-28 rounded-full bg-[#C0974D]/20 blur-2xl" />
 
       <div className="flex items-center gap-5">
         {/* Avatar parallax */}
@@ -60,23 +61,28 @@ function FounderCard({ name, role, img }: FounderProps) {
           style={{ translateY: translateAvatar, translateZ: 30 }}
           className="relative h-16 w-16 shrink-0 transform-[translateZ(30px)]"
         >
-          <Image src={img} alt={name} fill className="rounded-full object-cover" />
-          <div className="absolute inset-0 rounded-full ring-2 ring-transparent group-hover:ring-[#C0974D]/60 transition" />
+          <Image
+            src={img}
+            alt={name}
+            fill
+            className="rounded-full object-cover"
+          />
+          <div className="absolute inset-0 rounded-full ring-2 ring-transparent transition group-hover:ring-[#C0974D]/60" />
         </motion.div>
 
         <div className="transform-[translateZ(20px)]">
-          <div className="font-semibold text-lg">{name}</div>
+          <div className="text-lg font-semibold">{name}</div>
           <div className="text-sm text-[#1C2C4B]/60">{role}</div>
         </div>
       </div>
 
-      <p className="mt-4 text-sm text-[#1C2C4B]/80 leading-relaxed transform-[translateZ(10px)]">
+      <p className="mt-4 transform-[translateZ(10px)] text-sm leading-relaxed text-[#1C2C4B]/80">
         Menginisiasi arah strategis Balale, mengembangkan kemitraan, dan
         memastikan setiap program membawa dampak nyata bagi komunitas.
       </p>
 
       <span
-        className="mt-5 block h-1 w-14 rounded-full bg-[#C0974D]/70 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+        className="mt-5 block h-1 w-14 origin-left scale-x-0 rounded-full bg-[#C0974D]/70 transition-transform duration-300 group-hover:scale-x-100"
         aria-hidden
       />
     </motion.div>
@@ -84,29 +90,35 @@ function FounderCard({ name, role, img }: FounderProps) {
 }
 
 // ===== Anim helpers =====
+const fadeUpTransition: Transition = {
+  duration: 0.6,
+  ease: [0.22, 1, 0.36, 1],
+};
+const fadeTransition: Transition = { duration: 0.8 };
+
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: "easeOut" },
+  transition: fadeUpTransition,
   viewport: { once: true, margin: "-120px" },
 };
 
 const fade = {
   initial: { opacity: 0 },
   whileInView: { opacity: 1 },
-  transition: { duration: 0.8 },
+  transition: fadeTransition,
   viewport: { once: true },
 };
 
 export default function AboutContent() {
   return (
-    <main className=" text-[#1C2C4B] min-h-screen overflow-hidden">
+    <main className="min-h-screen overflow-hidden text-[#1C2C4B]">
       {/* Header Section */}
-      <section className="container mx-auto px-4 pt-28 md:pt-36 pb-16 text-center relative">
+      <section className="relative container mx-auto px-4 pt-28 pb-16 text-center md:pt-36">
         {/* Soft blob decor */}
         <motion.div
           {...fade}
-          className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full blur-3xl opacity-30"
+          className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full opacity-30 blur-3xl"
           style={{
             background:
               "radial-gradient(60% 60% at 50% 50%, #C0974D66 0%, transparent 70%)",
@@ -114,7 +126,7 @@ export default function AboutContent() {
         />
         <motion.div
           {...fade}
-          className="pointer-events-none absolute -bottom-8 -right-12 h-64 w-64 rounded-full blur-3xl opacity-30"
+          className="pointer-events-none absolute -right-12 -bottom-8 h-64 w-64 rounded-full opacity-30 blur-3xl"
           style={{
             background:
               "radial-gradient(60% 60% at 50% 50%, #1C2C4B66 0%, transparent 70%)",
@@ -123,14 +135,14 @@ export default function AboutContent() {
 
         <motion.h1
           {...fadeUp}
-          className="text-4xl md:text-5xl font-extrabold tracking-tight"
+          className="text-4xl font-extrabold tracking-tight md:text-5xl"
         >
           Tentang Balale.id
         </motion.h1>
         <motion.p
           {...fadeUp}
           transition={{ ...fadeUp.transition, delay: 0.1 }}
-          className="mt-4 max-w-3xl mx-auto text-[#1C2C4B]/80 leading-relaxed"
+          className="mx-auto mt-4 max-w-3xl leading-relaxed text-[#1C2C4B]/80"
         >
           <strong>Balale.id</strong> menghadirkan ekosistem digital untuk
           pelestarian budaya dan pemberdayaan ekonomi kreatif. Kami berfokus
@@ -147,10 +159,12 @@ export default function AboutContent() {
       </section>
 
       {/* Section 1 — Profil Singkat */}
-      <section className="container mx-auto px-4 pb-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 pb-20 md:grid-cols-2">
         <motion.div {...fadeUp}>
-          <h2 className="text-2xl md:text-3xl font-bold mb-3">Profil Balale.id</h2>
-          <p className="text-[#1C2C4B]/80 leading-relaxed">
+          <h2 className="mb-3 text-2xl font-bold md:text-3xl">
+            Profil Balale.id
+          </h2>
+          <p className="leading-relaxed text-[#1C2C4B]/80">
             Didirikan pada tahun <strong>2024</strong> di{" "}
             <strong>Yogyakarta</strong>, Balale.id adalah platform kolaboratif
             yang menghubungkan <em>pelaku budaya</em>, <em>pendidik</em>, dan{" "}
@@ -160,10 +174,10 @@ export default function AboutContent() {
             mendorong kemajuan ekonomi kreatif Indonesia.
           </p>
 
-          <h3 className="mt-8 text-xl md:text-2xl font-semibold text-[#C0974D]">
+          <h3 className="mt-8 text-xl font-semibold text-[#C0974D] md:text-2xl">
             Fokus Kami
           </h3>
-          <ul className="mt-3 list-disc list-inside text-[#1C2C4B]/80 space-y-1">
+          <ul className="mt-3 list-inside list-disc space-y-1 text-[#1C2C4B]/80">
             <li>Permainan Tradisional</li>
             <li>Kriya Lokal & Produk Budaya</li>
             <li>Edukasi & Literasi Budaya</li>
@@ -187,19 +201,19 @@ export default function AboutContent() {
       </section>
 
       {/* Section 2 — Visi & Misi */}
-      <section className="relative overflow-hidden bg-[#1C2C4B] text-[#EEECE4] py-20">
+      <section className="relative overflow-hidden bg-[#1C2C4B] py-20 text-[#EEECE4]">
         <motion.div
           {...fade}
-          className="pointer-events-none absolute -right-20 -top-16 h-80 w-80 rounded-full blur-3xl opacity-30"
+          className="pointer-events-none absolute -top-16 -right-20 h-80 w-80 rounded-full opacity-30 blur-3xl"
           style={{
             background:
               "radial-gradient(60% 60% at 50% 50%, #C0974D88 0%, transparent 70%)",
           }}
         />
-        <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-start">
+        <div className="container mx-auto grid items-start gap-12 px-6 md:grid-cols-2 md:px-12">
           <motion.div {...fadeUp}>
-            <h2 className="text-3xl font-bold mb-4 text-[#C0974D]">Visi</h2>
-            <p className="text-[#EEECE4]/90 leading-relaxed">
+            <h2 className="mb-4 text-3xl font-bold text-[#C0974D]">Visi</h2>
+            <p className="leading-relaxed text-[#EEECE4]/90">
               Menjadi platform digital budaya yang menghubungkan nilai-nilai
               tradisi Nusantara dengan inovasi modern demi menciptakan ekosistem
               kreatif yang berdaya saing global dan berkelanjutan.
@@ -210,8 +224,8 @@ export default function AboutContent() {
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: 0.1 }}
           >
-            <h2 className="text-3xl font-bold mb-4 text-[#C0974D]">Misi</h2>
-            <ul className="text-[#EEECE4]/90 space-y-2 list-disc list-inside">
+            <h2 className="mb-4 text-3xl font-bold text-[#C0974D]">Misi</h2>
+            <ul className="list-inside list-disc space-y-2 text-[#EEECE4]/90">
               <li>
                 Mendorong pelestarian budaya melalui inovasi dan digitalisasi.
               </li>
@@ -235,11 +249,11 @@ export default function AboutContent() {
       <section className="container mx-auto px-4 py-24">
         <motion.h2
           {...fadeUp}
-          className="text-3xl md:text-4xl font-bold text-center"
+          className="text-center text-3xl font-bold md:text-4xl"
         >
           Pilar Ekosistem Balale
         </motion.h2>
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
               t: "Education",
@@ -262,7 +276,7 @@ export default function AboutContent() {
               key={item.t}
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: 0.05 * i }}
-              className="rounded-2xl bg-white/90 ring-1 ring-black/5 p-5 text-center shadow-[0_8px_30px_rgba(28,44,75,0.10)]"
+              className="rounded-2xl bg-white/90 p-5 text-center shadow-[0_8px_30px_rgba(28,44,75,0.10)] ring-1 ring-black/5"
             >
               <h4 className="font-semibold text-[#1C2C4B]">{item.t}</h4>
               <p className="mt-2 text-sm text-[#1C2C4B]/80">{item.d}</p>
@@ -272,17 +286,17 @@ export default function AboutContent() {
       </section>
 
       {/* Section 4 — Program Unggulan */}
-      <section className="relative overflow-hidden bg-[#1C2C4B] text-[#EEECE4] py-20">
-        <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="relative overflow-hidden bg-[#1C2C4B] py-20 text-[#EEECE4]">
+        <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-6 md:grid-cols-2 md:px-12">
           <motion.div {...fadeUp}>
-            <h2 className="text-3xl font-bold mb-4">Program & Acara</h2>
-            <p className="text-white leading-relaxed mb-4">
+            <h2 className="mb-4 text-3xl font-bold">Program & Acara</h2>
+            <p className="mb-4 leading-relaxed text-white">
               Balale.id menginisiasi beragam kegiatan budaya dan inovasi, mulai
-              dari festival, bootcamp, hingga pameran interaktif. Semua dirancang
-              untuk menghubungkan kreativitas generasi muda dengan nilai-nilai
-              luhur Nusantara.
+              dari festival, bootcamp, hingga pameran interaktif. Semua
+              dirancang untuk menghubungkan kreativitas generasi muda dengan
+              nilai-nilai luhur Nusantara.
             </p>
-            <ul className="list-disc list-inside text-white space-y-1">
+            <ul className="list-inside list-disc space-y-1 text-white">
               <li>Festival Dolanan Nusantara</li>
               <li>Balale Innovation Camp</li>
               <li>Program Digitalisasi UMKM & Workshop Kriya</li>
@@ -293,7 +307,7 @@ export default function AboutContent() {
           <motion.div
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: 0.1 }}
-            className="rounded-2xl bg-white ring-1 ring-black/5 p-4 shadow-[0_8px_30px_rgba(28,44,75,0.10)]"
+            className="rounded-2xl bg-white p-4 shadow-[0_8px_30px_rgba(28,44,75,0.10)] ring-1 ring-black/5"
           >
             <Image
               src="/assets/images/about/ecosystem-showcase.jpg"
@@ -302,7 +316,7 @@ export default function AboutContent() {
               height={540}
               className="rounded-xl object-cover"
             />
-            <p className="text-xs text-[#1C2C4B]/60 mt-3 text-center">
+            <p className="mt-3 text-center text-xs text-[#1C2C4B]/60">
               *Ilustrasi kegiatan & ekosistem Balale.id (gantikan dengan foto
               resmi).
             </p>
@@ -312,7 +326,7 @@ export default function AboutContent() {
 
       {/* Section 5 — Data Singkat */}
       <section className="container mx-auto px-4 py-20">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <div className="grid grid-cols-2 gap-4 text-center sm:grid-cols-4">
           {[
             { label: "Didirikan", value: "2024" },
             { label: "Markas", value: "Yogyakarta" },
@@ -322,7 +336,7 @@ export default function AboutContent() {
             <motion.div
               key={item.label}
               {...fadeUp}
-              className="rounded-xl bg-white ring-1 ring-black/5 p-4"
+              className="rounded-xl bg-white p-4 ring-1 ring-black/5"
             >
               <div className="text-sm text-[#1C2C4B]/60">{item.label}</div>
               <div className="text-base font-semibold">{item.value}</div>
@@ -332,29 +346,41 @@ export default function AboutContent() {
       </section>
 
       {/* Section 6 — Founder & Co-Founders (dengan hover animasi) */}
-      <section className="relative overflow-hidden  text-[#1C2C4B] py-24">
+      <section className="relative overflow-hidden py-24 text-[#1C2C4B]">
         <div className="container mx-auto px-6 md:px-12">
           <motion.h2
             {...fadeUp}
-            className="text-3xl md:text-4xl font-extrabold text-center"
+            className="text-center text-3xl font-extrabold md:text-4xl"
           >
             Balale Founder & Co-Founders
           </motion.h2>
           <motion.p
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: 0.1 }}
-            className="mt-3 max-w-3xl mx-auto text-center text-[#1C2C4B]/80"
+            className="mx-auto mt-3 max-w-3xl text-center text-[#1C2C4B]/80"
           >
             Balale dibangun oleh tim lintas disiplin dengan latar belakang
             budaya, pendidikan, dan teknologi. Kami percaya kolaborasi adalah
             kunci inovasi berkelanjutan.
           </motion.p>
 
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-[1000px]">
+          <div className="mt-10 grid grid-cols-1 gap-6 perspective-[1000px] sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { name: "Deni Irawan", role: "Founder", img: "/assets/images/team/deni.jpg" },
-              { name: "Prita Elriza", role: "Co-Founder", img: "/assets/images/team/prita.jpg" },
-              { name: "Anggraini", role: "Co-Founder", img: "/assets/images/team/anggraini.jpg" },
+              {
+                name: "Deni Irawan",
+                role: "Founder",
+                img: "/assets/images/team/deni.jpg",
+              },
+              {
+                name: "Prita Elriza",
+                role: "Co-Founder",
+                img: "/assets/images/team/prita.jpg",
+              },
+              {
+                name: "Anggraini",
+                role: "Co-Founder",
+                img: "/assets/images/team/anggraini.jpg",
+              },
             ].map((p) => (
               <FounderCard key={p.name} {...p} />
             ))}
@@ -363,10 +389,10 @@ export default function AboutContent() {
       </section>
 
       {/* Section 7 — Tim Ahli & Staf */}
-      <section className="bg-[#1C2C4B] text-[#EEECE4] py-24">
-        <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-10">
+      <section className="bg-[#1C2C4B] py-24 text-[#EEECE4]">
+        <div className="container mx-auto grid gap-10 px-6 md:grid-cols-2 md:px-12">
           <motion.div {...fadeUp}>
-            <h3 className="text-3xl font-bold text-[#C0974D] mb-3">
+            <h3 className="mb-3 text-3xl font-bold text-[#C0974D]">
               Tim Ahli & Staf
             </h3>
             <p className="text-[#EEECE4]/85">
@@ -389,7 +415,7 @@ export default function AboutContent() {
             ].map((t) => (
               <li
                 key={t}
-                className="rounded-xl bg-white/10 ring-1 ring-white/10 px-4 py-3"
+                className="rounded-xl bg-white/10 px-4 py-3 ring-1 ring-white/10"
               >
                 {t}
               </li>
@@ -400,9 +426,9 @@ export default function AboutContent() {
 
       {/* Section 8 — Komunitas Member & Research Teachers */}
       <section className="py-24">
-        <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-start">
+        <div className="container mx-auto grid items-start gap-12 px-6 md:grid-cols-2 md:px-12">
           <motion.div {...fadeUp}>
-            <h3 className="text-3xl font-bold mb-3">
+            <h3 className="mb-3 text-3xl font-bold">
               Balale Member & Research Teachers Community
             </h3>
             <p className="text-[#1C2C4B]/80">
@@ -415,7 +441,7 @@ export default function AboutContent() {
           <motion.div
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: 0.1 }}
-            className="rounded-2xl bg-white ring-1 ring-black/5 p-6 shadow-[0_8px_30px_rgba(28,44,75,0.10)]"
+            className="rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgba(28,44,75,0.10)] ring-1 ring-black/5"
           >
             <div className="grid grid-cols-2 gap-4 text-center">
               {[
@@ -437,13 +463,13 @@ export default function AboutContent() {
       {/* Section 9 — Program/Events Detail ala katalog */}
       <section className="bg-[#F9F8F4] py-24">
         <div className="container mx-auto px-6 md:px-12">
-          <motion.h3 {...fadeUp} className="text-3xl font-bold mb-8">
+          <motion.h3 {...fadeUp} className="mb-8 text-3xl font-bold">
             Program / Event Balale
           </motion.h3>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {/* Kolom 1: Regional & Nasional */}
             <div className="space-y-3">
-              <div className="text-[#C0974D] font-semibold">
+              <div className="font-semibold text-[#C0974D]">
                 Regional & Nasional
               </div>
               {[
@@ -455,7 +481,7 @@ export default function AboutContent() {
               ].map((t) => (
                 <div
                   key={t}
-                  className="rounded-xl bg-white ring-1 ring-black/5 px-4 py-3"
+                  className="rounded-xl bg-white px-4 py-3 ring-1 ring-black/5"
                 >
                   {t}
                 </div>
@@ -464,7 +490,7 @@ export default function AboutContent() {
 
             {/* Kolom 2: Internasional */}
             <div className="space-y-3">
-              <div className="text-[#C0974D] font-semibold">Internasional</div>
+              <div className="font-semibold text-[#C0974D]">Internasional</div>
               {[
                 "Global Digital Heritage Week (GDHW)",
                 "Craft & Code World Forum (CCWF)",
@@ -473,7 +499,7 @@ export default function AboutContent() {
               ].map((t) => (
                 <div
                   key={t}
-                  className="rounded-xl bg-white ring-1 ring-black/5 px-4 py-3"
+                  className="rounded-xl bg-white px-4 py-3 ring-1 ring-black/5"
                 >
                   {t}
                 </div>
@@ -482,7 +508,7 @@ export default function AboutContent() {
 
             {/* Kolom 3: Olimpiade/Kompetisi & Non-Kompetisi */}
             <div className="space-y-3">
-              <div className="text-[#C0974D] font-semibold">
+              <div className="font-semibold text-[#C0974D]">
                 Olimpiade & Non-Kompetisi
               </div>
               {[
@@ -494,7 +520,7 @@ export default function AboutContent() {
               ].map((t) => (
                 <div
                   key={t}
-                  className="rounded-xl bg-white ring-1 ring-black/5 px-4 py-3"
+                  className="rounded-xl bg-white px-4 py-3 ring-1 ring-black/5"
                 >
                   {t}
                 </div>
@@ -506,10 +532,10 @@ export default function AboutContent() {
 
       {/* Section 10 — Kemitraan */}
       <section className="py-24">
-        <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12">
+        <div className="container mx-auto grid gap-12 px-6 md:grid-cols-2 md:px-12">
           <motion.div {...fadeUp}>
-            <h3 className="text-3xl font-bold mb-3">National Partner</h3>
-            <p className="text-[#1C2C4B]/80 mb-4">
+            <h3 className="mb-3 text-3xl font-bold">National Partner</h3>
+            <p className="mb-4 text-[#1C2C4B]/80">
               Dalam implementasi program, Balale berkolaborasi dengan
               kementerian/lembaga, pemerintah daerah, serta perguruan tinggi dan
               mitra industri di Indonesia.
@@ -524,7 +550,7 @@ export default function AboutContent() {
               ].map((l) => (
                 <span
                   key={l}
-                  className="rounded-full bg-[#1C2C4B] text-white ring-1 ring-black/5 px-4 py-2 text-sm"
+                  className="rounded-full bg-[#1C2C4B] px-4 py-2 text-sm text-white ring-1 ring-black/5"
                 >
                   {l}
                 </span>
@@ -535,8 +561,8 @@ export default function AboutContent() {
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: 0.1 }}
           >
-            <h3 className="text-3xl font-bold mb-3">International Partner</h3>
-            <p className="text-[#1C2C4B]/80 mb-4">
+            <h3 className="mb-3 text-3xl font-bold">International Partner</h3>
+            <p className="mb-4 text-[#1C2C4B]/80">
               Balale juga bekerja sama dengan jaringan global di Asia, Eropa,
               Amerika, dan Afrika untuk membuka kesempatan kolaborasi lintas
               negara.
@@ -551,7 +577,7 @@ export default function AboutContent() {
               ].map((l) => (
                 <span
                   key={l}
-                  className="rounded-full bg-[#1C2C4B] text-white ring-1 ring-black/5 px-4 py-2 text-sm"
+                  className="rounded-full bg-[#1C2C4B] px-4 py-2 text-sm text-white ring-1 ring-black/5"
                 >
                   {l}
                 </span>
@@ -562,43 +588,39 @@ export default function AboutContent() {
       </section>
 
       {/* CTA Footer */}
-        <section className="bg-[#1C2C4B] text-[#EEECE4] py-16">
-        <div className="container mx-auto px-6 md:px-12 text-center">
-            <motion.h3
-            {...fadeUp}
-            className="text-2xl md:text-3xl font-bold"
-            >
+      <section className="bg-[#1C2C4B] py-16 text-[#EEECE4]">
+        <div className="container mx-auto px-6 text-center md:px-12">
+          <motion.h3 {...fadeUp} className="text-2xl font-bold md:text-3xl">
             Bergabung dengan Ekosistem Balale
-            </motion.h3>
-            <motion.p
+          </motion.h3>
+          <motion.p
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: 0.1 }}
             className="mt-2 text-[#EEECE4]/85"
-            >
+          >
             Jadilah bagian dari gerakan pelestarian budaya dan inovasi kreatif.
             Mari ciptakan dampak yang berkelanjutan bersama-sama.
-            </motion.p>
-            <motion.div
+          </motion.p>
+          <motion.div
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: 0.15 }}
             className="mt-6 flex justify-center gap-3"
-            >
+          >
             <a
-                href="/join"
-                className="inline-flex items-center rounded-xl bg-[#C0974D] hover:bg-[#a4813d] px-5 py-3 font-semibold text-white shadow transition"
+              href="/join"
+              className="inline-flex items-center rounded-xl bg-[#C0974D] px-5 py-3 font-semibold text-white shadow transition hover:bg-[#a4813d]"
             >
-                Gabung Komunitas
+              Gabung Komunitas
             </a>
             <a
-                href="/partners"
-                className="inline-flex items-center rounded-xl bg-transparent ring-1 ring-white/40 px-5 py-3 font-semibold hover:bg-white/10 transition"
+              href="/partners"
+              className="inline-flex items-center rounded-xl bg-transparent px-5 py-3 font-semibold ring-1 ring-white/40 transition hover:bg-white/10"
             >
-                Kemitraan
+              Kemitraan
             </a>
-            </motion.div>
+          </motion.div>
         </div>
-        </section>
-
+      </section>
     </main>
   );
 }
