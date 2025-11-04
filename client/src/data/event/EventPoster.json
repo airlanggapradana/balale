@@ -29,6 +29,17 @@
       "image": "/assets/images/events/balalecamp.jpg",
       "description": "Bootcamp inovasi dan hackathon budaya untuk generasi muda kreatif.",
       "link": "https://balale.id/events/innovation-camp"
+    },
+    {
+    "id": "E003",
+    "title": "KriyaNusa Creative Summit",
+    "subtitle": "Nasional",
+    "category": "Event",
+    "location": "Surabaya",
+    "date": "5–8 September 2026",
+    "image": "/assets/images/events/kriyanusa-summit.jpg",
+    "description": "Konferensi dan pameran nasional yang mempertemukan inovator, perajin lokal, dan pelaku industri kreatif untuk berkolaborasi membangun ekonomi budaya berkelanjutan.",
+    "link": "https://balale.id/events/kriyanusa-summit"
     }
   ],
 
