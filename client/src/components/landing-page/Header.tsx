@@ -13,6 +13,17 @@ import {
   X,
   ChevronDown,
   Home,
+  Info,
+  GraduationCap,
+  Package,
+  Users,
+  UserCheck,
+  Users2,
+  Camera,
+  ImageDown,
+  Video,
+  HelpCircle,
+  Mail,
 } from "lucide-react";
 
 const Header: React.FC = () => {
@@ -92,7 +103,7 @@ const Header: React.FC = () => {
             aria-current={isActive("/") ? "page" : undefined}
             className={`font-semibold transition-colors ${
               isActive("/") ? "text-[#C0974D]" : "text-gray-700"
-            } hover:text-[#C0974D] flex items-center gap-2`}
+            } flex items-center gap-2 hover:text-[#C0974D]`}
           >
             <Home className="h-4 w-4" /> Home
           </Link>
@@ -275,12 +286,7 @@ const Header: React.FC = () => {
 
         {/* Panel: SOLID biru tua, bukan transparan */}
         <aside
-          className={`absolute left-0 top-0 h-full w-[84%] max-w-sm
-          bg-[#0F223B] text-[#F3F5F9]
-          ring-1 ring-white/10
-          shadow-[0_24px_80px_rgba(0,0,0,0.65)]
-          transition-transform duration-300 ease-in-out
-          ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+          className={`absolute top-0 left-0 h-full w-[84%] max-w-sm bg-[#0F223B] text-[#F3F5F9] shadow-[0_24px_80px_rgba(0,0,0,0.65)] ring-1 ring-white/10 transition-transform duration-300 ease-in-out ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
           role="dialog"
           aria-modal="true"
         >
@@ -314,143 +320,170 @@ const Header: React.FC = () => {
           </div>
 
           {/* Nav list */}
-          <nav className="max-h-[calc(100vh-4rem)] overflow-y-auto p-3">
+          <nav className="max-h-[calc(100vh-4rem)] overflow-y-auto bg-[#0F223B] p-3 text-white">
             <ul className="space-y-1">
               <li>
                 <Link
                   href="/"
-                  className="flex items-center gap-2 rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  className="flex items-center gap-3 rounded-lg px-4 py-3.5 font-semibold text-white transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                   onClick={() => setMobileOpen(false)}
                 >
-                  <Home className="h-4 w-4 text-white" /> Home
+                  <Home className="h-5 w-5 text-white" />
+                  <span>Home</span>
                 </Link>
-                <div className="mx-3 mt-2 border-b border-white/10" />
+                <div className="mx-4 mt-2 border-b border-white/15" />
               </li>
 
               <li>
                 <Link
                   href="/about"
-                  className="block rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  className="flex items-center gap-3 rounded-lg px-4 py-3.5 font-semibold text-white transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                   onClick={() => setMobileOpen(false)}
                 >
-                  About
+                  <Info className="h-5 w-5 text-white" />
+                  <span>About</span>
                 </Link>
-                <div className="mx-3 mt-2 border-b border-white/10" />
+                <div className="mx-4 mt-2 border-b border-white/15" />
+              </li>
+
+              <li>
+                <Link
+                  href="/education"
+                  className="flex items-center gap-3 rounded-lg px-4 py-3.5 font-semibold text-white transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <GraduationCap className="h-5 w-5 text-white" />
+                  <span>Education</span>
+                </Link>
+                <div className="mx-4 mt-2 border-b border-white/15" />
+              </li>
+
+              <li>
+                <Link
+                  href="/products"
+                  className="flex items-center gap-3 rounded-lg px-4 py-3.5 font-semibold text-white transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <Package className="h-5 w-5 text-white" />
+                  <span>Product</span>
+                </Link>
+                <div className="mx-4 mt-2 border-b border-white/15" />
               </li>
 
               {/* Accordion: Our Team */}
               <li>
                 <button
-                  className="flex w-full items-center justify-between rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  className="flex w-full items-center justify-between rounded-lg px-4 py-3.5 font-semibold text-white transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                   onClick={() => toggleSub("team")}
                   aria-expanded={!!openSub.team}
                 >
-                  <span>Our Team</span>
+                  <div className="flex items-center gap-3">
+                    <Users className="h-5 w-5 text-white" />
+                    <span>Our Team</span>
+                  </div>
                   <ChevronDown
-                    className={`h-4 w-4 text-white transition-transform ${
+                    className={`h-5 w-5 text-white transition-transform duration-200 ${
                       openSub.team ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 {openSub.team && (
-                  <ul className="ml-3 mt-1 space-y-1 border-l border-white/10 pl-3">
+                  <ul className="mt-1 ml-4 space-y-1 border-l-2 border-white/20 pl-4">
                     <li>
                       <Link
                         href="/team"
-                        className="block rounded-md px-3 py-2 text-center text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                        className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-white/95 transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                         onClick={() => setMobileOpen(false)}
                       >
-                        Balale Expert Team
+                        <UserCheck className="h-4 w-4" />
+                        <span>Balale Expert Team</span>
                       </Link>
                     </li>
                     <li>
                       <Link
                         href="/team/staff"
-                        className="block rounded-md px-3 py-2 text-center text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                        className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-white/95 transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                         onClick={() => setMobileOpen(false)}
                       >
-                        Balale Staff
+                        <Users2 className="h-4 w-4" />
+                        <span>Balale Staff</span>
                       </Link>
                     </li>
                   </ul>
                 )}
-                <div className="mx-3 mt-2 border-b border-white/10" />
+                <div className="mx-4 mt-2 border-b border-white/15" />
               </li>
-
-              {/*<li>
-                 <Link
-                  href="/newsletter"
-                  className="block rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Newsletter
-                </Link>
-                <div className="mx-3 mt-2 border-b border-white/10" />
-              </li> */}
 
               {/* Accordion: Gallery */}
               <li>
                 <button
-                  className="flex w-full items-center justify-between rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  className="flex w-full items-center justify-between rounded-lg px-4 py-3.5 font-semibold text-white transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                   onClick={() => toggleSub("gallery")}
                   aria-expanded={!!openSub.gallery}
                 >
-                  <span>Gallery</span>
+                  <div className="flex items-center gap-3">
+                    <ImageDown className="h-5 w-5 text-white" />
+                    <span>Gallery</span>
+                  </div>
                   <ChevronDown
-                    className={`h-4 w-4 text-white transition-transform ${
+                    className={`h-5 w-5 text-white transition-transform duration-200 ${
                       openSub.gallery ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 {openSub.gallery && (
-                  <ul className="ml-3 mt-1 space-y-1 border-l border-white/10 pl-3">
+                  <ul className="mt-1 ml-4 space-y-1 border-l-2 border-white/20 pl-4">
                     <li>
                       <Link
-                        href="/gallery/photos"
-                        className="block rounded-md px-3 py-2 text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                        href="/galleryphoto"
+                        className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-white/95 transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                         onClick={() => setMobileOpen(false)}
                       >
-                        Photo Events
+                        <Camera className="h-4 w-4" />
+                        <span>Photo Events</span>
                       </Link>
                     </li>
                     <li>
                       <Link
-                        href="/gallery/videos"
-                        className="block rounded-md px-3 py-2 text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                        href="/galleryvideo"
+                        className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-white/95 transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                         onClick={() => setMobileOpen(false)}
                       >
-                        Video Events
+                        <Video className="h-4 w-4" />
+                        <span>Video Events</span>
                       </Link>
                     </li>
                   </ul>
                 )}
-                <div className="mx-3 mt-2 border-b border-white/10" />
+                <div className="mx-4 mt-2 border-b border-white/15" />
               </li>
 
               <li>
                 <Link
                   href="/faqpage"
-                  className="block rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  className="flex items-center gap-3 rounded-lg px-4 py-3.5 font-semibold text-white transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                   onClick={() => setMobileOpen(false)}
                 >
-                  FAQ
+                  <HelpCircle className="h-5 w-5 text-white" />
+                  <span>FAQ</span>
                 </Link>
-                <div className="mx-3 mt-2 border-b border-white/10" />
+                <div className="mx-4 mt-2 border-b border-white/15" />
               </li>
 
               <li>
                 <Link
                   href="/contactpage"
-                  className="block rounded-md px-3 py-3 font-semibold text-white/90 hover:bg-[#C0974D]/15 hover:text-white"
+                  className="flex items-center gap-3 rounded-lg px-4 py-3.5 font-semibold text-white transition-colors hover:bg-[#C0974D]/20 hover:text-white active:bg-[#C0974D]/30"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Contact Us
+                  <Mail className="h-5 w-5 text-white" />
+                  <span>Contact Us</span>
                 </Link>
-                <div className="mx-3 mt-2 border-b border-white/10" />
+                <div className="mx-4 mt-2 border-b border-white/15" />
               </li>
 
               {/* Actions */}
-              <li className="mt-3 flex gap-2 border-t border-white/10 pt-3">
+              <li className="mt-4 flex flex-col gap-2.5 border-t border-white/15 pt-4 sm:flex-row">
                 {isLoggedIn ? (
                   <>
                     <button
@@ -458,12 +491,10 @@ const Header: React.FC = () => {
                         router.push("/carts");
                         setMobileOpen(false);
                       }}
-                      className="flex-1 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-3 py-2 font-semibold text-white transition hover:bg-white/10"
+                      className="flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-3 font-semibold text-white transition-all active:scale-95 active:bg-white/15"
                     >
-                      <span className="inline-flex items-center gap-2">
-                        <ShoppingCart className="h-5 w-5 text-white" />
-                        Carts
-                      </span>
+                      <ShoppingCart className="h-5 w-5" />
+                      <span>Carts</span>
                     </button>
                     <button
                       onClick={() => {
@@ -471,11 +502,10 @@ const Header: React.FC = () => {
                         window.dispatchEvent(new Event("authChange"));
                         setMobileOpen(false);
                       }}
-                      className="flex-1 rounded-md bg-[#C0974D] px-3 py-2 font-semibold text-white transition hover:bg-[#a7813b]"
+                      className="flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg bg-[#C0974D] px-4 py-3 font-semibold text-white transition-all active:scale-95 active:bg-[#b08a45]"
                     >
-                      <span className="inline-flex items-center gap-2">
-                        <LogOut className="h-5 w-5" /> Logout
-                      </span>
+                      <LogOut className="h-5 w-5" />
+                      <span>Logout</span>
                     </button>
                   </>
                 ) : (
@@ -485,18 +515,17 @@ const Header: React.FC = () => {
                         router.push("/auth");
                         setMobileOpen(false);
                       }}
-                      className="flex-1 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-3 py-2 font-semibold text-white transition hover:bg-white/10"
+                      className="flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-3 font-semibold text-white transition-all active:scale-95 active:bg-white/15"
                     >
-                      <span className="inline-flex items-center gap-2">
-                        <LogIn className="h-5 w-5 text-white" /> Masuk
-                      </span>
+                      <LogIn className="h-5 w-5" />
+                      <span>Masuk</span>
                     </button>
                     <button
                       onClick={() => {
                         router.push("/auth");
                         setMobileOpen(false);
                       }}
-                      className="flex-1 rounded-md bg-[#C0974D] px-3 py-2 font-semibold text-white transition hover:bg-[#a7813b]"
+                      className="min-h-[44px] flex-1 rounded-lg bg-[#C0974D] px-4 py-3 font-semibold text-white transition-all active:scale-95 active:bg-[#b08a45]"
                     >
                       Daftar
                     </button>

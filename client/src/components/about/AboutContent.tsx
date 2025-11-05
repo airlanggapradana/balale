@@ -1,11 +1,13 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import type { Transition } from "framer-motion";
+import { FaTv } from "react-icons/fa";
+import aura from "@/assets/Tim Inti (core)/Aura.webp";
 
 // ===== Hover Founder Card =====
-type FounderProps = { name: string; role: string; img: string };
+type FounderProps = { name: string; role: string; img: StaticImageData };
 
 function FounderCard({ name, role, img }: FounderProps) {
   // motion values untuk tilt mengikuti kursor
@@ -165,13 +167,14 @@ export default function AboutContent() {
             Profil Balale.id
           </h2>
           <p className="leading-relaxed text-[#1C2C4B]/80">
-            Didirikan pada tahun <strong>2024</strong> di{" "}
-            <strong>Yogyakarta</strong>, Balale.id adalah platform kolaboratif
-            yang menghubungkan <em>pelaku budaya</em>, <em>pendidik</em>, dan{" "}
-            <em>kreator lokal</em> dalam satu ekosistem digital berkelanjutan.
-            Kami mempertemukan <strong>tradisi</strong> dan{" "}
-            <strong>inovasi</strong> untuk menjaga warisan budaya sambil
-            mendorong kemajuan ekonomi kreatif Indonesia.
+            <strong>Balale.id</strong> adalah platform digital yang menghidupkan
+            kembali permainan tradisional Indonesia melalui inovasi teknologi.
+            Kami berfokus pada digitalisasi produk kriya permainan tradisional,
+            pemberdayaan pengrajin lokal, serta pembelajaran budaya interaktif
+            bagi generasi muda. Melalui Balale.id, masyarakat dapat menjelajahi
+            nilai sejarah di balik setiap permainan rakyat, memainkan versi
+            digitalnya dalam mini games edukatif, serta mendukung langsung para
+            pengrajin kriya daerah.
           </p>
 
           <h3 className="mt-8 text-xl font-semibold text-[#C0974D] md:text-2xl">
@@ -214,9 +217,8 @@ export default function AboutContent() {
           <motion.div {...fadeUp}>
             <h2 className="mb-4 text-3xl font-bold text-[#C0974D]">Visi</h2>
             <p className="leading-relaxed text-[#EEECE4]/90">
-              Menjadi platform digital budaya yang menghubungkan nilai-nilai
-              tradisi Nusantara dengan inovasi modern demi menciptakan ekosistem
-              kreatif yang berdaya saing global dan berkelanjutan.
+              Menjadi platform digital pelestarian budaya yang mempertemukan
+              tradisi dan teknologi untuk memperkuat identitas bangsa Indonesia.
             </p>
           </motion.div>
 
@@ -227,18 +229,20 @@ export default function AboutContent() {
             <h2 className="mb-4 text-3xl font-bold text-[#C0974D]">Misi</h2>
             <ul className="list-inside list-disc space-y-2 text-[#EEECE4]/90">
               <li>
-                Mendorong pelestarian budaya melalui inovasi dan digitalisasi.
+                Mempromosikan dan mendigitalisasi kriya permainan tradisional
+                lokal.
               </li>
               <li>
-                Memberdayakan komunitas lokal & UMKM agar mandiri secara kreatif
-                dan ekonomi.
+                Menyediakan media pembelajaran budaya yang interaktif dan
+                inklusif.
               </li>
               <li>
-                Membangun ruang edukasi budaya yang interaktif dan inklusif.
+                Memberdayakan pengrajin lokal melalui pemasaran berbasis
+                teknologi.
               </li>
               <li>
-                Menjadi jembatan kolaborasi antara generasi muda, pelaku budaya,
-                dan industri kreatif.
+                Mengedukasi generasi muda tentang nilai-nilai budaya Indonesia
+                melalui permainan digital.
               </li>
             </ul>
           </motion.div>
@@ -249,27 +253,147 @@ export default function AboutContent() {
       <section className="container mx-auto px-4 py-24">
         <motion.h2
           {...fadeUp}
-          className="text-center text-3xl font-bold md:text-4xl"
+          className="mx-auto flex max-w-3xl items-center justify-center gap-3 text-center text-3xl font-bold md:text-4xl"
         >
-          Pilar Ekosistem Balale
+          <motion.span
+            aria-hidden
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#C0974D]/10 text-[#C0974D]"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              role="img"
+              aria-hidden="true"
+            >
+              <path d="M9 21h6v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 .993-.883L18 18v-1a6 6 0 1 0-12 0v1l-0.994.116A1 1 0 0 0 5 20h1a1 1 0 0 1 1 1v1zM12 3a4 4 0 0 1 4 4c0 1.657-1.006 3.066-2.4 3.678a1 1 0 0 0-.6.922V13a1 1 0 0 1-1 1h-1v2h-2v-2H9a1 1 0 0 1-1-1v-1.4a1 1 0 0 0-.6-.922C6.006 10.066 5 8.657 5 7a4 4 0 0 1 4-4h3z" />
+            </svg>
+          </motion.span>
+          <span>Pilar Ekosistem Balale</span>
         </motion.h2>
+
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
               t: "Education",
               d: "Modul pembelajaran budaya interaktif dan workshop kreatif berbasis teknologi.",
+              icon: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6l8 4-8 4-8-4 8-4z"
+                  />
+                  <path
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 14v6"
+                  />
+                </svg>
+              ),
             },
             {
               t: "Product",
               d: "Katalog kriya dan permainan tradisional berkualitas dengan cerita lokal.",
+              icon: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <rect
+                    x="3"
+                    y="7"
+                    width="18"
+                    height="13"
+                    rx="2"
+                    ry="2"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16 3v4M8 3v4"
+                  />
+                </svg>
+              ),
             },
             {
               t: "Community",
               d: "Jaringan komunitas budaya dan kreator lokal yang berkolaborasi dalam proyek nyata.",
+              icon: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17 20v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2"
+                  />
+                  <circle
+                    cx="12"
+                    cy="7"
+                    r="4"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              ),
             },
             {
               t: "Innovation",
               d: "Inkubasi ide, digitalisasi UMKM, dan transformasi nilai budaya ke era modern.",
+              icon: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 2v6"
+                  />
+                  <path
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 11a7 7 0 0014 0c0-3.866-3.134-7-7-7"
+                  />
+                  <path
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 22v-4"
+                  />
+                </svg>
+              ),
             },
           ].map((item, i) => (
             <motion.div
@@ -278,7 +402,12 @@ export default function AboutContent() {
               transition={{ ...fadeUp.transition, delay: 0.05 * i }}
               className="rounded-2xl bg-white/90 p-5 text-center shadow-[0_8px_30px_rgba(28,44,75,0.10)] ring-1 ring-black/5"
             >
-              <h4 className="font-semibold text-[#1C2C4B]">{item.t}</h4>
+              <div className="flex items-center justify-center">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#C0974D]/10 text-[#C0974D]">
+                  {item.icon}
+                </span>
+              </div>
+              <h4 className="mt-4 font-semibold text-[#1C2C4B]">{item.t}</h4>
               <p className="mt-2 text-sm text-[#1C2C4B]/80">{item.d}</p>
             </motion.div>
           ))}
@@ -289,7 +418,10 @@ export default function AboutContent() {
       <section className="relative overflow-hidden bg-[#1C2C4B] py-20 text-[#EEECE4]">
         <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-6 md:grid-cols-2 md:px-12">
           <motion.div {...fadeUp}>
-            <h2 className="mb-4 text-3xl font-bold">Program & Acara</h2>
+            <div className="flex items-center gap-5">
+              <FaTv size={32} />
+              <h2 className="mb-4 text-3xl font-bold">Program &amp; Acara</h2>
+            </div>
             <p className="mb-4 leading-relaxed text-white">
               Balale.id menginisiasi beragam kegiatan budaya dan inovasi, mulai
               dari festival, bootcamp, hingga pameran interaktif. Semua
@@ -328,8 +460,8 @@ export default function AboutContent() {
       <section className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-2 gap-4 text-center sm:grid-cols-4">
           {[
-            { label: "Didirikan", value: "2024" },
-            { label: "Markas", value: "Yogyakarta" },
+            { label: "Didirikan", value: "2025" },
+            { label: "Markas", value: "Surakarta" },
             { label: "Fokus", value: "Budaya, Kriya, UMKM" },
             { label: "Nilai", value: "Keberlanjutan & Kolaborasi" },
           ].map((item) => (
@@ -364,22 +496,12 @@ export default function AboutContent() {
             kunci inovasi berkelanjutan.
           </motion.p>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 perspective-[1000px] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto mt-10 flex max-w-lg items-center justify-center">
             {[
               {
-                name: "Deni Irawan",
+                name: "Aura Kalbu",
                 role: "Founder",
-                img: "/assets/images/team/deni.jpg",
-              },
-              {
-                name: "Prita Elriza",
-                role: "Co-Founder",
-                img: "/assets/images/team/prita.jpg",
-              },
-              {
-                name: "Anggraini",
-                role: "Co-Founder",
-                img: "/assets/images/team/anggraini.jpg",
+                img: aura,
               },
             ].map((p) => (
               <FounderCard key={p.name} {...p} />
