@@ -1,100 +1,132 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { X } from "lucide-react";
+import expert1 from "@/assets/Tim Expert/cahyaningtyas-sekar-wahyuni - TI.webp";
+import expert2 from "@/assets/Tim Expert/Pak Arief.webp";
+import expert3 from "@/assets/Tim Expert/Ibu Laili - PBSI.webp";
+import expert4 from "@/assets/Tim Expert/Pak Diaz-PTI.webp";
+import expert5 from "@/assets/Tim Expert/Pak Dipa - PBSI.webp";
+import expert6 from "@/assets/Tim Expert/Pak Hardika-PTI.webp";
+import expert7 from "@/assets/Tim Expert/Pak Yunus Sulistyono - PBSI.webp";
 
-const expertImages = [
-  "/assets/images/team/balale/1.png",
-  "/assets/images/team/balale/2.png",
-  "/assets/images/team/balale/3.png",
-  "/assets/images/team/balale/4.png",
-  "/assets/images/team/balale/5.png",
-  "/assets/images/team/balale/6.png",
-  "/assets/images/team/balale/7.png",
-  "/assets/images/team/balale/8.png",
-  "/assets/images/team/balale/9.png",
+interface Expert {
+  image: StaticImageData;
+  name: string;
+  occupation: string;
+}
+
+const experts: Expert[] = [
+  {
+    image: expert1,
+    name: "Cahyaningtyas Sekar Wahyuni",
+    occupation: "Dosen Teknik Informatika",
+  },
+  {
+    image: expert2,
+    name: "Arief",
+    occupation: "Sekprodi Program Studi Pendidikan Teknik Informatika",
+  },
+  {
+    image: expert3,
+    name: "Laili",
+    occupation:
+      "Lektor Kepala Program Studi Pendidikan Bahasa dan Sastra Indonesia, Fakultas Keguruan dan Ilmu Pendidikan",
+  },
+  {
+    image: expert4,
+    name: "Diaz",
+    occupation: "Dosen Pendidikan Teknik Informatika",
+  },
+  {
+    image: expert5,
+    name: "Dipa",
+    occupation: "Sekprodi Program Studi Magister Pendidikan Bahasa Indonesia",
+  },
+  {
+    image: expert6,
+    name: "Hardika",
+    occupation:
+      "Kabid Pengelolaan dan Layanan Digital UPT Perpustakaan dan Layanan Digital",
+  },
+  {
+    image: expert7,
+    name: "Yunus Sulistyono",
+    occupation: "Kaprodi Program Studi Pendidikan Bahasa dan Sastra Indonesia",
+  },
 ];
 
 export default function ExpertTeamClient() {
-  const [selected, setSelected] = useState<string | null>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    selected ? dialog.showModal() : dialog.close();
-  }, [selected]);
-
   return (
-    <main className="relative min-h-screen overflow-hidden pt-28 pb-24 text-[#1C2C4B] md:pt-36">
-      {/* Background pattern */}
+    <div className="relative min-h-screen w-full bg-[#fafafa] text-gray-900">
+      {/* Diagonal Grid Background */}
       <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[url('/assets/backgrounds/batik.png')] bg-top bg-repeat opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: `
+                repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 20px),
+                repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 20px)
+              `,
+          backgroundSize: "40px 40px",
+        }}
       />
 
-      {/* Title */}
-      <section className="container mx-auto mb-16 px-6 text-center">
-        <h1 className="text-4xl font-extrabold text-[#1C2C4B] md:text-5xl">
-          Balale Expert Team
-        </h1>
-        <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-[#1C2C4B]/80">
-          Kami adalah kumpulan kurator budaya, peneliti, desainer, dan
-          pengembang teknologi yang berkomitmen menjaga warisan Nusantara sambil
-          menginovasi masa depan.
-        </p>
-        <div className="mt-5 flex justify-center">
-          <span className="h-1 w-24 rounded-full bg-[#C0974D]" />
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="container mx-auto grid grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3">
-        {expertImages.map((src, i) => (
-          <div
-            key={i}
-            className="group relative cursor-pointer overflow-hidden rounded-2xl bg-white/70 shadow-[0_10px_40px_rgba(28,44,75,0.10)] ring-1 ring-[#D9DFEA]/70 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_80px_rgba(28,44,75,0.25)]"
-          >
-            <Image
-              src={src}
-              alt={`Balale Expert ${i + 1}`}
-              width={600}
-              height={700}
-              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-              onClick={() => setSelected(src)}
-            />
-            <div className="absolute inset-0 bg-linear-to-t from-[#1C2C4B]/60 via-transparent to-transparent opacity-0 transition-all duration-500 group-hover:opacity-100" />
-            <div className="absolute -inset-20 translate-x-[-120%] rotate-12 bg-linear-to-r from-transparent via-[#C0974D]/30 to-transparent mix-blend-overlay transition-transform duration-1200 ease-out group-hover:translate-x-[120%]" />
+      <div className="relative z-10 py-16 md:py-24 lg:py-28">
+        {/* Header Section */}
+        <section className="container mx-auto mb-12 px-4 text-center sm:px-6 md:mb-16">
+          <h1 className="text-3xl font-extrabold text-[#1C2C4B] sm:text-4xl md:text-5xl lg:text-6xl">
+            Balale Expert Team
+          </h1>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#1C2C4B]/80 sm:mt-4 sm:text-base md:max-w-3xl">
+            Kami adalah kumpulan kurator budaya, peneliti, desainer, dan
+            pengembang teknologi yang berkomitmen menjaga warisan Nusantara
+            sambil menginovasi masa depan.
+          </p>
+          <div className="mt-4 flex justify-center md:mt-5">
+            <span className="h-1 w-20 rounded-full bg-[#C0974D] sm:w-24" />
           </div>
-        ))}
-      </section>
+        </section>
 
-      {/* Lightbox */}
-      <dialog
-        ref={dialogRef}
-        className="w-[min(92vw,900px)] rounded-2xl p-0 backdrop:bg-black/70"
-      >
-        <div className="relative">
-          <button
-            className="absolute top-3 right-3 z-10 rounded-full bg-black/60 p-2 text-white transition hover:bg-black/80"
-            onClick={() => setSelected(null)}
-          >
-            <X className="h-5 w-5" />
-          </button>
+        {/* Expert Cards Grid */}
+        <section className="container mx-auto grid grid-cols-1 gap-6 px-4 sm:grid-cols-2 sm:gap-8 sm:px-6 lg:grid-cols-3 lg:gap-10">
+          {experts.map((expert, i) => (
+            <div key={i} className="group relative cursor-pointer">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#C0974D]/20 via-white to-[#1C2C4B]/10 p-[2px] transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl sm:rounded-3xl">
+                <div className="relative overflow-hidden rounded-[calc(1rem-2px)] bg-white sm:rounded-[22px]">
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    <Image
+                      src={expert.image}
+                      alt={expert.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                    />
 
-          {selected && (
-            <Image
-              src={selected}
-              alt="Full view"
-              width={900}
-              height={1000}
-              className="h-auto w-full rounded-2xl bg-[#0b0e13] object-contain"
-            />
-          )}
-        </div>
-      </dialog>
-    </main>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1C2C4B] via-[#1C2C4B]/40 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-50" />
+
+                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+
+                    <div className="absolute right-0 bottom-0 left-0 p-4 text-white sm:p-6">
+                      <h3 className="text-lg font-bold drop-shadow-lg sm:text-xl">
+                        {expert.name}
+                      </h3>
+                      <p className="mt-1 text-xs text-white/90 drop-shadow-md sm:text-sm">
+                        {expert.occupation}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="absolute right-0 bottom-0 left-0 h-1 bg-gradient-to-r from-[#C0974D] via-[#C0974D]/60 to-transparent" />
+                </div>
+              </div>
+
+              <div className="absolute -top-2 -right-2 h-6 w-6 border-t-4 border-r-4 border-[#C0974D] opacity-0 transition-all duration-500 group-hover:opacity-100 sm:h-8 sm:w-8" />
+              <div className="absolute -bottom-2 -left-2 h-6 w-6 border-b-4 border-l-4 border-[#C0974D] opacity-0 transition-all duration-500 group-hover:opacity-100 sm:h-8 sm:w-8" />
+            </div>
+          ))}
+        </section>
+      </div>
+    </div>
   );
 }
