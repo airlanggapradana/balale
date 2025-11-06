@@ -25,7 +25,7 @@ export default function HomePage() {
       <Curation />
       <Event />
       <NationalAffiliation />
-      <InternationalAffiliation />
+      {/*<InternationalAffiliation />*/}
       <MediaPartner />
       <Newsletter />
     </main>

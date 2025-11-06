@@ -9,17 +9,10 @@ type Logo = {
 };
 
 const LOGOS: Logo[] = [
-  { src: "/assets/images/logo/National Affiliation/IPB.webp", alt: "IPB" },
-  { src: "/assets/images/logo/National Affiliation/unikom.webp", alt: "Unikom" },
-  { src: "/assets/images/logo/National Affiliation/UD.webp", alt: "UD" },
-  { src: "/assets/images/logo/National Affiliation/i3l.webp", alt: "i3l" },
-  { src: "/assets/images/logo/National Affiliation/UMK.webp", alt: "UMK" },
-  { src: "/assets/images/logo/National Affiliation/UP.webp", alt: "UP" },
-  { src: "/assets/images/logo/National Affiliation/UST.webp", alt: "UST" },
-  { src: "/assets/images/logo/National Affiliation/LOGOKEMENAG.png", alt: "Kemenag" },
-  { src: "/assets/images/logo/National Affiliation/USY.webp", alt: "USY" },
-  { src: "/assets/images/logo/National Affiliation/UTS.webp", alt: "UTS" },
-  { src: "/assets/images/logo/National Affiliation/isb.webp", alt: "ISB" },
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Logo_Kementerian_Kebudayaan_Republik_Indonesia_%282024%29.svg/1512px-Logo_Kementerian_Kebudayaan_Republik_Indonesia_%282024%29.svg.png",
+    alt: "IPB",
+  },
 ];
 
 function TrackItem({ logo }: { logo: Logo }) {
@@ -41,7 +34,10 @@ function TrackItem({ logo }: { logo: Logo }) {
 export default function NationalAffiliation() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [duration, setDuration] = useState<number>(28);
-  const items = useMemo(() => [...LOGOS, ...LOGOS], []);
+  const items = useMemo(
+    () => (LOGOS.length > 1 ? [...LOGOS, ...LOGOS] : LOGOS),
+    [LOGOS.length],
+  );
 
   useEffect(() => {
     const el = trackRef.current;
@@ -78,22 +74,23 @@ export default function NationalAffiliation() {
   }, []);
 
   return (
-    <section className="relative py-20 bg-[#1C2C4B] overflow-hidden">
+    <section className="relative overflow-hidden bg-[#1C2C4B] py-20">
       {/* Aksen latar belakang */}
       <div className="absolute inset-0 bg-linear-to-b from-[#111E34] via-[#1C2C4B] to-[#223A5C] opacity-95" />
-      <div className="absolute right-0 top-0 w-64 h-64 bg-[#C0974D]/20 blur-3xl rounded-full mix-blend-overlay" />
-      <div className="absolute left-0 bottom-0 w-80 h-80 bg-[#077377]/20 blur-3xl rounded-full mix-blend-overlay" />
+      <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-[#C0974D]/20 mix-blend-overlay blur-3xl" />
+      <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-[#077377]/20 mix-blend-overlay blur-3xl" />
 
-      <div className="relative container mx-auto px-4 z-10">
-        <h2 className="text-center text-2xl md:text-3xl font-bold text-[#EEECE4]">
+      <div className="relative z-10 container mx-auto px-4">
+        <h2 className="text-center text-2xl font-bold text-[#EEECE4] md:text-3xl">
           National Affiliation
         </h2>
-        <p className="text-center text-[#EEECE4]/80 mt-2 max-w-2xl mx-auto">
-          Balale.id telah berkolaborasi dengan berbagai universitas dan lembaga nasional
-          untuk memperkuat jaringan pelestarian budaya, riset, dan inovasi lokal.
+        <p className="mx-auto mt-2 max-w-2xl text-center text-[#EEECE4]/80">
+          Balale.id telah berkolaborasi dengan berbagai universitas dan lembaga
+          nasional untuk memperkuat jaringan pelestarian budaya, riset, dan
+          inovasi lokal.
         </p>
 
-        <div className="mt-10 na-wrapper group">
+        <div className="na-wrapper group mt-10">
           <div ref={trackRef} className="na-track" aria-hidden={duration === 0}>
             {items.map((logo, i) => (
               <TrackItem key={`${logo.src}-${i}`} logo={logo} />
@@ -127,7 +124,7 @@ export default function NationalAffiliation() {
           );
         }
 
-        /* Track animasi berjalan horizontal */
+        /* Track animasi berjalan horizontal - disabled for static display */
         .na-track {
           --gap: 48px;
           --marquee-dur: ${duration}s;
@@ -138,7 +135,7 @@ export default function NationalAffiliation() {
           align-items: center;
           gap: var(--gap);
           width: max-content;
-          animation: na-scroll var(--marquee-dur) linear infinite;
+          animation: none; /* disabled to keep it static */
         }
 
         .na-wrapper:hover .na-track {
@@ -155,9 +152,12 @@ export default function NationalAffiliation() {
           border-radius: 16px;
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(4px);
-          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+          box-shadow:
+            0 0 0 1px rgba(255, 255, 255, 0.15) inset,
             0 8px 24px rgba(0, 0, 0, 0.2);
-          transition: transform 300ms ease, box-shadow 300ms ease,
+          transition:
+            transform 300ms ease,
+            box-shadow 300ms ease,
             background 300ms ease;
         }
 
@@ -166,7 +166,10 @@ export default function NationalAffiliation() {
           max-width: 100%;
           height: auto;
           filter: grayscale(1) contrast(1) saturate(0.6);
-          transition: transform 400ms ease, filter 400ms ease, opacity 300ms ease;
+          transition:
+            transform 400ms ease,
+            filter 400ms ease,
+            opacity 300ms ease;
           opacity: 0.9;
         }
 
@@ -180,8 +183,7 @@ export default function NationalAffiliation() {
         }
 
         .na-item:hover .na-img {
-          filter: grayscale(0)
-            drop-shadow(0 4px 14px rgba(192, 151, 77, 0.35));
+          filter: grayscale(0) drop-shadow(0 4px 14px rgba(192, 151, 77, 0.35));
           transform: scale(1.06);
           opacity: 1;
         }

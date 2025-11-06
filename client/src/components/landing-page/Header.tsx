@@ -182,7 +182,7 @@ const Header: React.FC = () => {
             <ul className="invisible absolute left-0 mt-2 min-w-56 rounded-lg border bg-white p-2 opacity-0 shadow-lg transition-all duration-150 group-hover:visible group-hover:opacity-100">
               <li>
                 <Link
-                  href="/galleryphoto"
+                  href="/gallery/photos"
                   className="block rounded-md px-3 py-2 text-gray-700 hover:text-[#C0974D]"
                 >
                   Photo Events
@@ -190,7 +190,7 @@ const Header: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/galleryvideo"
+                  href="/gallery/videos"
                   className="block rounded-md px-3 py-2 text-gray-700 hover:text-[#C0974D]"
                 >
                   Video Events
@@ -200,17 +200,17 @@ const Header: React.FC = () => {
           </div>
 
           <Link
-            href="/faqpage"
-            aria-current={isActive("/faqpage") ? "page" : undefined}
+            href="/faq"
+            aria-current={isActive("/faq") ? "page" : undefined}
             className={`font-semibold transition-colors ${
-              isActive("/faqpage") ? "text-[#C0974D]" : "text-gray-700"
+              isActive("/faq") ? "text-[#C0974D]" : "text-gray-700"
             } hover:text-[#C0974D]`}
           >
             FAQ
           </Link>
 
           <Link
-            href="/contactpage"
+            href="/contact"
             aria-current={isActive("/contactpage") ? "page" : undefined}
             className={`font-semibold transition-colors ${
               isActive("/contactpage") ? "text-[#C0974D]" : "text-gray-700"

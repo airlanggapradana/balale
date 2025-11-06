@@ -1,9 +1,10 @@
+// client/src/components/home/Event.tsx
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { CalendarDays, MapPin } from "lucide-react";
-import rawJson from "@/data/event/EventPoster.json" assert { type: "json" };
+import { rawJson } from "@/data/event/EventPoster";
 
 // ---------- Type ----------
 type EventItem = {
@@ -14,7 +15,7 @@ type EventItem = {
   level?: string;
   location?: string;
   date?: string;
-  image: string;
+  image: string | StaticImageData;
   description?: string;
   link: string;
 };
@@ -32,10 +33,15 @@ function toEventItem(x: unknown): EventItem | null {
   if (!hasIdTitle(x)) return null;
   const obj = x as Record<string, unknown>;
 
-  const image =
-    typeof obj.image === "string" && obj.image.length > 0
-      ? obj.image
-      : "/assets/images/fallback-event.jpg"; // sediakan fallback di /public
+  // Accept both string URLs and StaticImageData objects
+  let image: string | StaticImageData = "/assets/images/fallback-event.jpg";
+
+  if (typeof obj.image === "string" && obj.image.length > 0) {
+    image = obj.image;
+  } else if (obj.image && typeof obj.image === "object" && "src" in obj.image) {
+    // StaticImageData from next/image imports
+    image = obj.image as StaticImageData;
+  }
 
   const link =
     typeof obj.link === "string" && obj.link.length > 0 ? obj.link : "#";
@@ -64,21 +70,18 @@ function getEvents(raw: unknown): EventItem[] {
   if (typeof raw === "object" && raw !== null) {
     const obj = raw as Record<string, unknown>;
 
-    // format A: { balale_events: [...] }
     if (Array.isArray(obj.balale_events)) {
       return (obj.balale_events as unknown[])
         .map(toEventItem)
         .filter(Boolean) as EventItem[];
     }
 
-    // format B: { event: [...] }
     if (Array.isArray(obj.event)) {
       return (obj.event as unknown[])
         .map(toEventItem)
         .filter(Boolean) as EventItem[];
     }
 
-    // format C: { collections: { events: [...] } }
     if (
       typeof obj.collections === "object" &&
       obj.collections !== null &&
@@ -95,11 +98,10 @@ function getEvents(raw: unknown): EventItem[] {
 
 // ---------- React Component ----------
 export default function Event() {
-  const events = getEvents(rawJson); // ← semua data terbaca
+  const events = getEvents(rawJson);
 
   return (
     <section id="featured-events" className="py-16">
-      {/* Heading */}
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-[#1C2C4B] md:text-4xl">
@@ -111,7 +113,6 @@ export default function Event() {
         </div>
       </div>
 
-      {/* Content */}
       <div className="container mx-auto px-4">
         {events.length === 0 ? (
           <div className="mt-10 rounded-2xl border border-dashed border-[#E7E7EC] p-8 text-center text-gray-600">
@@ -133,7 +134,10 @@ export default function Event() {
                   ].join(" ")}
                 >
                   {/* Poster */}
-                  <div className="relative aspect-16/10 w-full overflow-hidden">
+                  <div
+                    className="relative w-full overflow-hidden"
+                    style={{ aspectRatio: "16 / 10" }}
+                  >
                     <Image
                       src={ev.image}
                       alt={ev.title}
@@ -196,7 +200,6 @@ export default function Event() {
           </div>
         )}
 
-        {/* Load More */}
         <div className="mt-8 text-center">
           <Link
             href="/AllEventPage"

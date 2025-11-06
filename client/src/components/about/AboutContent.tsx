@@ -5,6 +5,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import type { Transition } from "framer-motion";
 import { FaTv } from "react-icons/fa";
 import aura from "@/assets/Tim Inti (core)/Aura.webp";
+import logo from "@/assets/logo_square.webp";
 
 // ===== Hover Founder Card =====
 type FounderProps = { name: string; role: string; img: StaticImageData };
@@ -194,11 +195,11 @@ export default function AboutContent() {
           className="flex justify-center"
         >
           <Image
-            src="/assets/images/logo/balale_white.png"
+            src={logo}
             alt="Logo Balale.id"
             width={400}
             height={400}
-            className="rounded-2xl bg-[#1C2C4B] p-8 shadow-[0_8px_30px_rgba(28,44,75,0.18)] ring-1 ring-black/5"
+            className="rounded-2xl bg-[#1C2C4B] p-4 shadow-[0_8px_30px_rgba(28,44,75,0.18)] ring-1 ring-black/5"
           />
         </motion.div>
       </section>

@@ -1,20 +1,24 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
+import medpart1 from "@/assets/medpart/LOGO TEKNIK INFORMATIKA UMS - BERWARNA 2.webp";
+import medpart2 from "@/assets/medpart/WhatsApp Image 2025-11-06 at 20.48.47_b0720833.webp";
+import medpart3 from "@/assets/medpart/WhatsApp Image 2025-11-06 at 20.48.47_ad100c4d.webp";
+import medpart4 from "@/assets/medpart/WhatsApp Image 2025-11-06 at 20.48.48_f85b34aa.webp";
+import medpart5 from "@/assets/medpart/WhatsApp Image 2025-11-06 at 20.49.57_5b4b43b3.webp";
 
 type Logo = {
-  src: string;
+  src: StaticImageData;
   alt: string;
 };
 
 const LOGOS: Logo[] = [
-  { src: "/assets/images/logo/Media Partner/THE PATENT_page-0002.jpg", alt: "The Patent" },
-  { src: "/assets/images/logo/Media Partner/THE PATENT_page-0002.jpg", alt: "The Patent" },
-  { src: "/assets/images/logo/Media Partner/THE PATENT_page-0002.jpg", alt: "The Patent" },
-  { src: "/assets/images/logo/Media Partner/THE PATENT_page-0002.jpg", alt: "The Patent" },
-  { src: "/assets/images/logo/Media Partner/THE PATENT_page-0002.jpg", alt: "The Patent" },
-  { src: "/assets/images/logo/Media Partner/THE PATENT_page-0002.jpg", alt: "The Patent" },
+  { src: medpart1, alt: "The Patent" },
+  { src: medpart2, alt: "The Patent" },
+  { src: medpart3, alt: "The Patent" },
+  { src: medpart4, alt: "The Patent" },
+  { src: medpart5, alt: "The Patent" },
   // Tambahkan lagi logo bila perlu
 ];
 
@@ -74,22 +78,23 @@ export default function MediaPartner() {
   }, []);
 
   return (
-    <section className="relative py-20 bg-[#1C2C4B] overflow-hidden">
+    <section className="relative overflow-hidden bg-[#1C2C4B] py-20">
       {/* Latar belakang gradasi & aksen blur */}
       <div className="absolute inset-0 bg-linear-to-b from-[#111E34] via-[#1C2C4B] to-[#223A5C] opacity-95" />
-      <div className="absolute right-0 top-0 w-64 h-64 bg-[#C0974D]/20 blur-3xl rounded-full mix-blend-overlay" />
-      <div className="absolute left-0 bottom-0 w-80 h-80 bg-[#077377]/25 blur-3xl rounded-full mix-blend-overlay" />
+      <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-[#C0974D]/20 mix-blend-overlay blur-3xl" />
+      <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-[#077377]/25 mix-blend-overlay blur-3xl" />
 
-      <div className="relative container mx-auto px-4 z-10">
-        <h2 className="text-center text-2xl md:text-3xl font-bold text-[#EEECE4]">
+      <div className="relative z-10 container mx-auto px-4">
+        <h2 className="text-center text-2xl font-bold text-[#EEECE4] md:text-3xl">
           Media Partner
         </h2>
-        <p className="text-center text-[#EEECE4]/80 mt-2 max-w-2xl mx-auto">
-          Kami berterima kasih kepada berbagai media yang turut mendukung misi Balale.id
-          dalam menyebarkan semangat pelestarian budaya dan inovasi kreatif Indonesia.
+        <p className="mx-auto mt-2 max-w-2xl text-center text-[#EEECE4]/80">
+          Kami berterima kasih kepada berbagai media yang turut mendukung misi
+          Balale.id dalam menyebarkan semangat pelestarian budaya dan inovasi
+          kreatif Indonesia.
         </p>
 
-        <div className="mt-10 mp-wrapper group">
+        <div className="mp-wrapper group mt-10">
           <div ref={trackRef} className="mp-track" aria-hidden={duration === 0}>
             {items.map((logo, i) => (
               <TrackItem key={`${logo.src}-${i}`} logo={logo} />
@@ -151,9 +156,13 @@ export default function MediaPartner() {
           border-radius: 16px;
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(4px);
-          box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+          box-shadow:
+            0 0 0 1px rgba(255, 255, 255, 0.15) inset,
             0 8px 24px rgba(0, 0, 0, 0.25);
-          transition: transform 300ms ease, box-shadow 300ms ease, background 300ms ease;
+          transition:
+            transform 300ms ease,
+            box-shadow 300ms ease,
+            background 300ms ease;
         }
 
         .mp-img {
@@ -161,7 +170,10 @@ export default function MediaPartner() {
           max-width: 100%;
           height: auto;
           filter: grayscale(1) contrast(1) saturate(0.6);
-          transition: transform 400ms ease, filter 400ms ease, opacity 300ms ease;
+          transition:
+            transform 400ms ease,
+            filter 400ms ease,
+            opacity 300ms ease;
           opacity: 0.9;
         }
 
@@ -175,8 +187,7 @@ export default function MediaPartner() {
         }
 
         .mp-item:hover .mp-img {
-          filter: grayscale(0)
-            drop-shadow(0 4px 14px rgba(192, 151, 77, 0.35));
+          filter: grayscale(0) drop-shadow(0 4px 14px rgba(192, 151, 77, 0.35));
           transform: scale(1.06);
           opacity: 1;
         }

@@ -1,9 +1,15 @@
 import type { Product } from "@/types/product.type";
+import product1 from "@/assets/products/Gemini_Generated_Image_2klt182klt182klt.webp";
+import product2 from "@/assets/products/Gemini_Generated_Image_jp4bztjp4bztjp4b.webp";
+import product3 from "@/assets/products/Gemini_Generated_Image_9ak5i9ak5i9ak5i9.webp";
+import product4 from "@/assets/products/Gemini_Generated_Image_ndr2twndr2twndr2.webp";
+import product5 from "@/assets/products/Gemini_Generated_Image_i0nafi0nafi0nafi.webp";
+import product6 from "@/assets/products/Gemini_Generated_Image_pakfvepakfvepakf.webp";
 
 export const products: Product[] = [
   {
     id: "p-001",
-    image_url: "https://picsum.photos/seed/p1/800/600",
+    image_url: product1,
     category: "Kerajinan Kayu",
     name: "Talenan Balok Kayu Jati",
     description:
@@ -15,7 +21,7 @@ export const products: Product[] = [
   },
   {
     id: "p-002",
-    image_url: "https://picsum.photos/seed/p2/800/600",
+    image_url: product2,
     category: "Tenun",
     name: "Syal Tenun Tradisional",
     description:
@@ -27,7 +33,7 @@ export const products: Product[] = [
   },
   {
     id: "p-003",
-    image_url: "https://picsum.photos/seed/p3/800/600",
+    image_url: product3,
     category: "Keramik",
     name: "Cangkir Kopi Handmade",
     description:
@@ -39,7 +45,7 @@ export const products: Product[] = [
   },
   {
     id: "p-004",
-    image_url: "https://picsum.photos/seed/p4/800/600",
+    image_url: product4,
     category: "Aksesori",
     name: "Gantungan Kunci Batik",
     description:
@@ -51,7 +57,7 @@ export const products: Product[] = [
   },
   {
     id: "p-005",
-    image_url: "https://picsum.photos/seed/p5/800/600",
+    image_url: product5,
     category: "Kuliner",
     name: "Sambal Buatan Rumah",
     description:
@@ -63,7 +69,7 @@ export const products: Product[] = [
   },
   {
     id: "p-006",
-    image_url: "https://picsum.photos/seed/p6/800/600",
+    image_url: product6,
     category: "Kulit",
     name: "Dompet Kulit Minimalis",
     description:

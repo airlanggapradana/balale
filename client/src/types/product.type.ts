@@ -1,6 +1,8 @@
+import type { StaticImageData } from "next/image";
+
 export type Product = {
   id: string;
-  image_url?: string;
+  image_url?: StaticImageData;
   category: string;
   name: string;
   description?: string;
