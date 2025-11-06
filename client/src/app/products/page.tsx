@@ -1,7 +1,7 @@
 "use client";
 import React, { useCallback } from "react";
 import { Card } from "@/components/ui/card";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ type CartItem = {
   id: string;
   name: string;
   price: number;
-  image_url?: string;
+  image_url?: StaticImageData;
   quantity: number;
 };
 
